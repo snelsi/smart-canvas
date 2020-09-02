@@ -12,38 +12,40 @@ const Bar = styled.aside`
   overflow-x: hidden;
   overflow-y: auto;
 
-  & > .sideBar-header {
-    color: var(--color-gray-70);
-    & h2 {
-      font-style: normal;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 28px;
-      letter-spacing: -0.015em;
-      margin-bottom: 20px;
+  & > div {
+    & > .sideBar-header {
+      color: var(--color-gray-70);
+      & h2 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;
+        letter-spacing: -0.015em;
+        margin-bottom: 20px;
 
-      & a {
-        text-decoration: none;
-        &:hover {
-          text-decoration: underline;
+        & a {
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
-    }
-    & .image-component {
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-    & img {
-      background-color: var(--color-gray-90);
-    }
-    & ul {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      padding-left: 20px;
-      line-height: 1.5;
-      & li {
-        margin-top: 0.25em;
-        margin-bottom: 0.25em;
+      & .image-component {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      & img {
+        background-color: var(--color-gray-90);
+      }
+      & ul {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding-left: 20px;
+        line-height: 1.5;
+        & li {
+          margin-top: 0.25em;
+          margin-bottom: 0.25em;
+        }
       }
     }
   }
@@ -67,12 +69,14 @@ export interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ sideBarHeader, menuItems = [] }) => (
   <Bar data-custom-scrollbar>
-    <div className="sideBar-header">{sideBarHeader}</div>
-    <ul>
-      {menuItems?.map((item) => (
-        <MenuItem key={item.fieldName} {...item} />
-      ))}
-    </ul>
+    <div>
+      <div className="sideBar-header">{sideBarHeader}</div>
+      <ul>
+        {menuItems?.map((item) => (
+          <MenuItem key={item.fieldName} {...item} />
+        ))}
+      </ul>
+    </div>
   </Bar>
 );
 
