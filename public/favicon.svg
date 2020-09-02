@@ -1,0 +1,20 @@
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <style>
+    path {
+      fill: #000;
+    }
+    @media (prefers-color-scheme: dark) {
+      path {
+        fill: #fff;
+      }
+    }
+  </style>
+  <g clip-path="url(#clip0)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.02 1.57a1.13 1.13 0 011.96 0l6.86 11.66c.46.78-.1 1.77-.98 1.77H1.14c-.89 0-1.43-.99-.98-1.77L7.02 1.57z" fill="#000"/>
+  </g>
+  <defs>
+    <clipPath id="clip0">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>
