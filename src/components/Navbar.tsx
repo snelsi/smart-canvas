@@ -119,6 +119,14 @@ const MenuList = styled.ul`
           margin: 0;
         }
       }
+
+      &:hover,
+      &:focus {
+        background-color: var(--color-gray-30);
+      }
+      &:active {
+        background-color: var(--color-gray-20);
+      }
       &.active {
         background-color: var(--color-primary);
         color: var(--color-gray-80);
