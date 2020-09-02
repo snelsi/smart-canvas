@@ -5,6 +5,13 @@ import { Tooltip } from "@chakra-ui/core";
 import { scenes } from "scenes";
 import { Logo } from "components";
 
+const StyledTooltip = styled(Tooltip)`
+  z-index: 5;
+  @media (min-width: 1020px) {
+    display: none;
+  }
+`;
+
 const Base = styled.div`
   display: block;
   background-color: var(--color-gray-10);
@@ -136,12 +143,12 @@ export const NavBar: React.FC<NavBarProps> = () => (
       <MenuList className="menuList">
         {Object.entries(scenes).map(([url, { title, icon }]) => (
           <li key={url}>
-            <Tooltip hasArrow label={title} aria-label={title} placement="right" bg="#303030">
+            <StyledTooltip hasArrow label={title} aria-label={title} placement="right" bg="#303030">
               <NavLink to={url} title={title}>
                 {icon && <span className="menuItem-icon">{icon}</span>}
                 <div className="menuItem-title">{title}</div>
               </NavLink>
-            </Tooltip>
+            </StyledTooltip>
           </li>
         ))}
       </MenuList>
