@@ -8,7 +8,7 @@ import { Logo } from "components";
 const StyledTooltip = styled(Tooltip)`
   z-index: 5;
   @media (min-width: 1020px) {
-    display: none;
+    display: none !important;
   }
 `;
 
