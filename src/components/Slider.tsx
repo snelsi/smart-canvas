@@ -76,7 +76,7 @@ const SliderMemo = ({
       console.log(`set ${fieldName} to ${defaultValue}`);
       setStateProp(fieldName, defaultValue);
     }
-  }, [value, fieldName, defaultValue]);
+  }, [value, fieldName, defaultValue, setStateProp]);
 
   return (
     <Base>

@@ -1,5 +1,4 @@
 import React from "react";
-import { IconType } from "react-icons";
 import { MenuItem } from "components";
 
 import { scene as Scene1 } from "./1/index";

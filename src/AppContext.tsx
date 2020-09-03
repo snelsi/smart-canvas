@@ -1,4 +1,5 @@
 import React from "react";
+import { useImmer } from "use-immer";
 
 interface AppContextProps {
   state: object;
@@ -28,25 +29,32 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
   children,
   ...props
 }) => {
-  const [appState, setAppState] = React.useState(() => initialState);
-  const stateRef = React.useRef(appState);
+  const [appState, updateAppState] = useImmer(initialState);
 
-  const setStateProp = React.useCallback((name = "", value: any) => {
-    const newState = { ...stateRef.current, [name]: value };
-    stateRef.current = newState;
-    setAppState(newState);
-  }, []);
-  const setStateProps = React.useCallback((values: object = {}) => {
-    const newState = { ...stateRef.current, ...values };
-    stateRef.current = newState;
-    setAppState(newState);
-  }, []);
+  const setStateProp = React.useCallback(
+    (name = "", value: any) => {
+      updateAppState((draft) => {
+        draft[name] = value;
+      });
+    },
+    [updateAppState],
+  );
+
+  const setStateProps = React.useCallback(
+    (values: object = {}) => {
+      updateAppState((draft) => {
+        for (const [key, value] of Object.entries(values)) {
+          draft[key] = value;
+        }
+      });
+    },
+    [updateAppState],
+  );
   const resetState = React.useCallback(
     (newState = initialState) => {
-      stateRef.current = newState;
-      setAppState(newState);
+      updateAppState(newState);
     },
-    [initialState],
+    [initialState, updateAppState],
   );
 
   return (
@@ -54,7 +62,7 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
       value={{
         state: appState,
         helpers: {
-          setAppState,
+          setAppState: updateAppState,
           setStateProp,
           setStateProps,
           resetState,
