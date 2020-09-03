@@ -73,7 +73,6 @@ const SliderMemo = ({
 
   React.useEffect(() => {
     if (value === undefined) {
-      console.log(`set ${fieldName} to ${defaultValue}`);
       setStateProp(fieldName, defaultValue);
     }
   }, [value, fieldName, defaultValue, setStateProp]);
