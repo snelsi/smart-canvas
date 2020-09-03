@@ -53,7 +53,7 @@ const Base = styled.div`
         display: inline-block;
         height: 20px;
         width: 20px;
-        margin-right: 20px;
+        margin-right: 16px;
       }
     }
   }
@@ -142,8 +142,7 @@ export const NavBar: React.FC<NavBarProps> = () => (
     <header>
       <h1>
         <a href="http://snelsi.now.sh/" target="_blank" rel="noreferrer noopener">
-          <Logo /> <span className="optional">R. Zhuravlov</span>
-          {/* R.V. Zhuravlov */}
+          <Logo /> <span className="optional">R.V. Zhuravlov</span>
         </a>
       </h1>
     </header>
