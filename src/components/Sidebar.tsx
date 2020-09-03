@@ -8,7 +8,7 @@ const Bar = styled.aside`
   background-color: var(--color-gray-20);
   padding: 32px 24px 64px;
   height: 100%;
-  width: 400px;
+  width: clamp(250px, 33vw, 400px);
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -48,11 +48,6 @@ const Bar = styled.aside`
         }
       }
     }
-  }
-
-  @media (max-width: 1020px) {
-    min-width: 250px;
-    width: 33vw;
   }
 `;
 
