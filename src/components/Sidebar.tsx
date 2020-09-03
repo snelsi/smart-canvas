@@ -6,7 +6,7 @@ import { Slider } from "components";
 const Bar = styled.aside`
   display: block;
   background-color: var(--color-gray-20);
-  padding: 32px 24px;
+  padding: 32px 24px 64px;
   height: 100%;
   width: 400px;
   overflow-x: hidden;

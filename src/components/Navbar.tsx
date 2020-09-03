@@ -15,7 +15,7 @@ const StyledTooltip = styled(Tooltip)`
 const Base = styled.div`
   display: block;
   background-color: var(--color-gray-10);
-  padding: 24px 8px;
+  padding: 24px 8px 48px;
   height: 100%;
   width: 240px;
   overflow-x: hidden;
