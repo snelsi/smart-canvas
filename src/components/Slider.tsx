@@ -53,7 +53,10 @@ interface SliderProps extends BaseSliderProps {
   fieldName: string;
 }
 
-export const Slider: React.FC<SliderProps> = ({
+const SliderShouldUpdate = (prev: SliderProps, cur: SliderProps) =>
+  prev.fieldName !== cur.fieldName || prev.title !== cur.title;
+
+const SliderMemo = ({
   title = "",
   fieldName,
   min = 0,
@@ -112,3 +115,4 @@ export const Slider: React.FC<SliderProps> = ({
     </Base>
   );
 };
+export const Slider: React.FC<SliderProps> = React.memo(SliderMemo, SliderShouldUpdate);

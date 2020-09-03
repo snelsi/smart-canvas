@@ -62,7 +62,7 @@ export interface SidebarProps {
   menuItems: MenuItem[];
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ sideBarHeader, menuItems = [] }) => (
+const SidebarMemo: React.FC<SidebarProps> = ({ sideBarHeader, menuItems = [] }) => (
   <Bar data-custom-scrollbar>
     <div>
       <div className="sideBar-header">{sideBarHeader}</div>
@@ -74,8 +74,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ sideBarHeader, menuItems = [] 
     </div>
   </Bar>
 );
+export const Sidebar = React.memo(SidebarMemo);
 
-export const MenuItem = ({ type, ...props }: MenuItem) => {
+const MenuItemMemo: React.FC<MenuItem> = ({ type, ...props }) => {
   if (type === "slider") return <Slider {...props} />;
   return null;
 };
+export const MenuItem = React.memo(MenuItemMemo);
