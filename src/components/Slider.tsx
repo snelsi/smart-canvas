@@ -18,7 +18,7 @@ const Base = styled.div`
     justify-content: space-between;
     margin-bottom: 4px;
     & > .slider-title {
-      color: var(--color-gray-50);
+      color: var(--color-gray-70);
       font-weight: 400;
       font-size: 16px;
       line-height: 24px;
@@ -27,7 +27,7 @@ const Base = styled.div`
       align-items: center;
       background-color: var(--color-gray-30);
       border-radius: 12px;
-      color: var(--color-gray-60);
+      color: var(--color-gray-70);
       display: flex;
       justify-content: center;
       text-align: center;
