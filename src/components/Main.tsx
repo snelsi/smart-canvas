@@ -4,6 +4,8 @@ import { Canvas } from "react-three-fiber";
 
 const Workspace = styled.main`
   background-color: var(--color-gray-30);
+  overflow: hidden;
+  width: 100%;
 `;
 
 interface MainProps {}
