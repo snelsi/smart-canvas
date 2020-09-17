@@ -56,6 +56,10 @@ export interface MenuItem {
   type: MenuItemType;
   fieldName: string;
   title: string;
+  defaultValue?: any;
+  minValue?: number;
+  maxValue?: number;
+  step?: number;
 }
 export interface SidebarProps {
   sideBarHeader?: React.ReactElement;

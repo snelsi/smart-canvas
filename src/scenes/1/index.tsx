@@ -3,6 +3,9 @@ import { MdBorderInner } from "react-icons/md";
 import { Scene } from "scenes";
 
 import { SideBarHeader } from "./SideBarHeader";
+import { Scene as SceneComponent } from "./Scene";
+
+export const prefix = "1-";
 
 export const scene: Scene = {
   title: "Лінійні перетворення",
@@ -11,35 +14,39 @@ export const scene: Scene = {
   menuItems: [
     {
       type: "slider",
-      fieldName: "squareSideSize",
+      fieldName: `${prefix}squareSideSize`,
       title: "N",
+      defaultValue: 1,
+      minValue: 0,
+      maxValue: 10,
+      step: 0.1,
     },
     {
       type: "slider",
-      fieldName: "innerCircleRaduis",
+      fieldName: `${prefix}innerCircleRaduis`,
       title: "R1",
     },
     {
       type: "slider",
-      fieldName: "outterCircleRaduis",
+      fieldName: `${prefix}outterCircleRaduis`,
       title: "R2",
     },
     {
       type: "slider",
-      fieldName: "cornerCircleRaduis",
+      fieldName: `${prefix}cornerCircleRaduis`,
       title: "R3",
     },
     {
       type: "slider",
-      fieldName: "diagonalCircleRaduis",
+      fieldName: `${prefix}diagonalCircleRaduis`,
       title: "R4",
     },
     {
       type: "slider",
-      fieldName: "spaceFromCenter",
+      fieldName: `${prefix}spaceFromCenter`,
       title: "D",
     },
   ],
-  scene: null,
+  scene: <SceneComponent />,
   initialValues: {},
 };

@@ -51,31 +51,30 @@ const Base = styled.div`
 interface SliderProps extends BaseSliderProps {
   title: string;
   fieldName: string;
+  minValue?: number;
+  maxValue?: number;
 }
 
 const SliderShouldUpdate = (prev: SliderProps, cur: SliderProps) =>
   prev.fieldName !== cur.fieldName || prev.title !== cur.title;
 
-const SliderMemo = ({
+const SliderMemo: React.FC<SliderProps> = ({
   title = "",
   fieldName,
-  min = 0,
-  max = 100,
+  minValue: min = 0,
+  maxValue: max = 100,
   step = 1,
-  defaultValue = 50,
+  defaultValue = (min + max) / 2,
   ...props
 }) => {
-  const {
-    value,
-    helpers: { setStateProp },
-  } = useField(fieldName);
+  const [value, setValue] = useField<number>(fieldName);
   const [key, setKey] = React.useState(value);
 
   React.useEffect(() => {
     if (value === undefined) {
-      setStateProp(fieldName, defaultValue);
+      setValue(defaultValue);
     }
-  }, [value, fieldName, defaultValue, setStateProp]);
+  }, [value, fieldName, defaultValue, setValue]);
 
   return (
     <Base>
@@ -88,7 +87,7 @@ const SliderMemo = ({
             onChange={(e) => {
               const { value } = e.target;
               setKey(value);
-              setStateProp(fieldName, value);
+              setValue(value);
             }}
             variant="filled"
             min={min}
@@ -100,7 +99,7 @@ const SliderMemo = ({
       <BaseSlider
         value={value}
         defaultValue={defaultValue}
-        onChange={(newValue) => setStateProp(fieldName, newValue)}
+        onChange={setValue}
         min={min}
         max={max}
         step={step}

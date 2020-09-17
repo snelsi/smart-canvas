@@ -4,6 +4,8 @@ import { Scene } from "scenes";
 
 import { SideBarHeader } from "./SideBarHeader";
 
+export const prefix = "2-";
+
 export const scene: Scene = {
   title: "Нелінійні перетворення",
   icon: <MdTimeline />,
@@ -11,17 +13,17 @@ export const scene: Scene = {
   menuItems: [
     {
       type: "slider",
-      fieldName: "squareSideSize",
+      fieldName: `${prefix}squareSideSize`,
       title: "N",
     },
     {
       type: "slider",
-      fieldName: "innerCircleRaduis",
+      fieldName: `${prefix}innerCircleRaduis`,
       title: "R1",
     },
     {
       type: "slider",
-      fieldName: "outterCircleRaduis",
+      fieldName: `${prefix}outterCircleRaduis`,
       title: "R2",
     },
   ],

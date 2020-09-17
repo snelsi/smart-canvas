@@ -1,6 +1,5 @@
 export * from "./AppLayout";
-export * from "./Canvas";
-export * from "./Hexagon";
+export * from "./Box";
 export * from "./Image";
 export * from "./Main";
 export * from "./Logo";
