@@ -18,8 +18,8 @@ export const scene: Scene = {
       fieldName: `${prefix}squareSideSize`,
       title: "N",
       defaultValue: 1,
-      minValue: 0,
-      maxValue: 10,
+      minValue: 0.1,
+      maxValue: 100,
       step: 0.1,
     },
     {
