@@ -29,7 +29,7 @@ export const CameraControls = () => {
         RIGHT: THREE.MOUSE.ROTATE,
       }}
       touches={{
-        ONE: THREE.TOUCH.PAN,
+        ONE: THREE.TOUCH.DOLLY_PAN,
         TWO: THREE.TOUCH.ROTATE,
       }}
     />
