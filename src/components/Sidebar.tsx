@@ -12,42 +12,35 @@ import {
 
 import { Slider } from "components";
 
-const Wrapper = styled.div`
-  & .sidebar-mobile {
-    @media (min-width: 801px) {
-      display: none;
-    }
-
-    & > button {
-      color: var(--color-gray-80);
-      padding: 4px;
-      position: fixed;
-      right: 16px;
-      z-index: 2;
-
-      height: 48px;
-      width: 48px;
-
-      background-color: var(--color-gray-10);
-
-      @media (min-width: 601px) {
-        top: 32px;
-      }
-      @media (max-width: 600px) {
-        bottom: 32px;
-      }
-
-      &:hover {
-        background-color: var(--color-gray-50);
-      }
-      &:active {
-        background-color: var(--color-gray-40);
-      }
-    }
+const SidebarMobile = styled.div`
+  @media (min-width: 801px) {
+    display: none;
   }
-  & .sidebar-desktop {
-    @media (max-width: 800px) {
-      display: none;
+
+  & > button {
+    color: var(--color-gray-80);
+    padding: 4px;
+    position: fixed;
+    right: 16px;
+    z-index: 2;
+
+    height: 48px;
+    width: 48px;
+
+    background-color: var(--color-gray-10);
+
+    @media (min-width: 721px) {
+      top: 32px;
+    }
+    @media (max-width: 720px) {
+      bottom: 32px;
+    }
+
+    &:hover {
+      background-color: var(--color-gray-50);
+    }
+    &:active {
+      background-color: var(--color-gray-40);
     }
   }
 `;
@@ -118,6 +111,10 @@ const Bar = styled.aside`
   width: clamp(250px, 33vw, 400px);
   overflow-x: hidden;
   overflow-y: auto;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 export type MenuItemType = "slider";
@@ -168,8 +165,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const onClose = () => setOpen(false);
 
   return (
-    <Wrapper>
-      <div className="sidebar-mobile">
+    <>
+      <SidebarMobile>
         <Button ref={btnRef} variantColor="teal" onClick={onOpen}>
           <svg fill="currentColor" viewBox="0 0 24 24" height="24" width="24">
             <circle cx="5" cy="5" r="2" />
@@ -209,16 +206,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </DrawerBody>
           </DrawerContent>
         </Drawer>
-      </div>
-      <div className="sidebar-desktop">
-        <SidebarBase
-          title={title}
-          titleLink={titleLink}
-          sideBarHeader={sideBarHeader}
-          menuItems={menuItems}
-        />
-      </div>
-    </Wrapper>
+      </SidebarMobile>
+
+      <SidebarBase
+        title={title}
+        titleLink={titleLink}
+        sideBarHeader={sideBarHeader}
+        menuItems={menuItems}
+      />
+    </>
   );
 };
 

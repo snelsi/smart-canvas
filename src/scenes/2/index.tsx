@@ -3,6 +3,7 @@ import { MdTimeline } from "react-icons/md";
 import { Scene } from "scenes";
 
 import { SideBarHeader } from "./SideBarHeader";
+import { Scene as SceneComponent } from "./Scene";
 
 export const prefix = "2-";
 
@@ -15,11 +16,19 @@ export const scene: Scene = {
       type: "slider",
       fieldName: `${prefix}squareSideSize`,
       title: "N",
+      defaultValue: 1,
+      minValue: 0,
+      maxValue: 10,
+      step: 0.1,
     },
     {
       type: "slider",
       fieldName: `${prefix}innerCircleRaduis`,
       title: "R1",
+      defaultValue: 1,
+      minValue: 0,
+      maxValue: 10,
+      step: 0.1,
     },
     {
       type: "slider",
@@ -27,6 +36,6 @@ export const scene: Scene = {
       title: "R2",
     },
   ],
-  scene: null,
+  scene: <SceneComponent />,
   initialValues: {},
 };
