@@ -9,6 +9,7 @@ export const prefix = "1-";
 
 export const scene: Scene = {
   title: "Лінійні перетворення",
+  titleLink: "tasks/lab1.pdf",
   icon: <MdBorderInner />,
   sideBarHeader: <SideBarHeader />,
   menuItems: [

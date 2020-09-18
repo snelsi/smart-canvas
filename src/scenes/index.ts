@@ -6,6 +6,7 @@ import { scene as Scene2 } from "./2/index";
 
 export interface Scene {
   title: string;
+  titleLink?: string;
   icon: React.ReactElement;
   menuItems: MenuItem[];
   initialValues?: { [key: string]: any };

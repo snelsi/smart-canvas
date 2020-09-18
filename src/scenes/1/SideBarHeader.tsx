@@ -8,11 +8,6 @@ interface SideBarHeaderProps {}
 export const SideBarHeader: React.FC<SideBarHeaderProps> = () => {
   return (
     <>
-      <h2>
-        <a href="tasks/lab1.pdf" target="_blank" rel="noopener noreferrer">
-          Лiнiйнi перетворення
-        </a>
-      </h2>
       <Image src={FigureSvg} lightboxSource={FigureJpg} alt="Figure scheme" />
       <ul>
         <li>N - Сторона квадрата</li>
