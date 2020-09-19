@@ -11,7 +11,7 @@ export const Scene = () => {
   const [N] = useField<number>(`${prefix}squareSideSize`);
   const [valueY] = useField<number>(`${prefix}innerCircleRaduis`);
 
-  const sqrtN = Math.sqrt(N);
+  const sqrtN = Math.sqrt(N / 2);
 
   const vertices = React.useMemo(() => {
     const points = [
