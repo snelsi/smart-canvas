@@ -31,6 +31,7 @@ const Base = styled.div`
       display: flex;
       justify-content: center;
       text-align: center;
+      padding: 0;
       height: 24px;
       width: 64px;
     }
