@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import FsLightbox from "fslightbox-react";
 
-const StyledButton = styled.button`
+const StyledWrapper = styled.div`
   border: none;
   background: none;
   border-radius: 3px;
@@ -13,7 +12,7 @@ const StyledButton = styled.button`
   margin: 0;
   padding: 0;
 
-  & > img {
+  & img {
     margin: 0;
     padding: 0;
     border-radius: inherit;
@@ -28,15 +27,10 @@ interface ImageProps {
   lightboxSource?: string;
   alt: string;
 }
-export const Image: React.FC<ImageProps> = ({ src, lightboxSource = src, alt = "" }) => {
-  const [toggler, setToggler] = React.useState(false);
-
+export const Image: React.FC<ImageProps> = ({ src, alt = "" }) => {
   return (
-    <div className="image-component">
-      <StyledButton onClick={() => setToggler(!toggler)}>
-        <img src={src} alt={alt} />
-      </StyledButton>
-      <FsLightbox toggler={toggler} sources={[lightboxSource]} />
-    </div>
+    <StyledWrapper className="image-component">
+      <img src={src} alt={alt} />
+    </StyledWrapper>
   );
 };

@@ -10,6 +10,7 @@ import {
   DrawerHeader,
 } from "@chakra-ui/core";
 
+import { SRLWrapper } from "simple-react-lightbox";
 import { Slider } from "components";
 
 const SidebarMobile = styled.div`
@@ -152,6 +153,22 @@ const SidebarBase: React.FC<SidebarProps> = React.memo(
   ),
 );
 
+const options = {
+  buttons: {
+    showAutoplayButton: false,
+    showDownloadButton: false,
+    showThumbnailsButton: false,
+    showNextButton: false,
+    showPrevButton: false,
+  },
+  thumbnails: {
+    showThumbnails: false,
+  },
+  caption: {
+    showCaption: false,
+  },
+};
+
 export const Sidebar: React.FC<SidebarProps> = ({
   title,
   titleLink,
@@ -165,7 +182,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const onClose = () => setOpen(false);
 
   return (
-    <>
+    <SRLWrapper options={options}>
       <SidebarMobile>
         <Button ref={btnRef} variantColor="teal" onClick={onOpen}>
           <svg fill="currentColor" viewBox="0 0 24 24" height="24" width="24">
@@ -214,7 +231,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         sideBarHeader={sideBarHeader}
         menuItems={menuItems}
       />
-    </>
+    </SRLWrapper>
   );
 };
 
