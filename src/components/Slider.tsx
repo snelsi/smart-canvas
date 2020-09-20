@@ -87,8 +87,9 @@ const SliderMemo: React.FC<SliderProps> = ({
             value={value}
             onChange={(e) => {
               const { value } = e.target;
-              setKey(value);
-              setValue(value);
+              const num = Number(value);
+              setKey(num);
+              setValue(num);
             }}
             variant="filled"
             min={min}

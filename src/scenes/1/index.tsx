@@ -3,7 +3,7 @@ import { MdBorderInner } from "react-icons/md";
 import { Scene } from "scenes";
 
 import { SideBarHeader } from "./SideBarHeader";
-import { Scene as SceneComponent } from "./Scene";
+import SceneComponent from "./Scene";
 
 export const prefix = "1-";
 
@@ -17,7 +17,7 @@ export const scene: Scene = {
       type: "slider",
       fieldName: `${prefix}squareSideSize`,
       title: "N",
-      defaultValue: 1,
+      defaultValue: 36,
       minValue: 0.1,
       maxValue: 100,
       step: 0.1,
@@ -26,26 +26,46 @@ export const scene: Scene = {
       type: "slider",
       fieldName: `${prefix}innerCircleRaduis`,
       title: "R1",
+      defaultValue: 1,
+      minValue: 0.05,
+      maxValue: 10,
+      step: 0.05,
     },
     {
       type: "slider",
       fieldName: `${prefix}outterCircleRaduis`,
       title: "R2",
+      defaultValue: 1.5,
+      minValue: 0.05,
+      maxValue: 10,
+      step: 0.05,
     },
     {
       type: "slider",
       fieldName: `${prefix}cornerCircleRaduis`,
       title: "R3",
+      defaultValue: 1,
+      minValue: 0.05,
+      maxValue: 10,
+      step: 0.05,
     },
     {
       type: "slider",
       fieldName: `${prefix}diagonalCircleRaduis`,
       title: "R4",
+      defaultValue: 1.2,
+      minValue: 0.05,
+      maxValue: 10,
+      step: 0.05,
     },
     {
       type: "slider",
       fieldName: `${prefix}spaceFromCenter`,
       title: "D",
+      defaultValue: 4,
+      minValue: 0.1,
+      maxValue: 20,
+      step: 0.1,
     },
   ],
   scene: <SceneComponent />,

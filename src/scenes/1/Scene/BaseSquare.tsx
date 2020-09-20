@@ -1,15 +1,13 @@
 import React from "react";
 
-import { Grid, CameraControls } from "components";
 import { useField } from "scripts";
 
-import { prefix } from ".";
+import { prefix } from "..";
 import * as THREE from "three";
 import { useUpdate } from "react-three-fiber";
 
-export const Scene = () => {
+const BaseSquare = () => {
   const [N] = useField<number>(`${prefix}squareSideSize`);
-  const [valueY] = useField<number>(`${prefix}innerCircleRaduis`);
 
   const sqrtN = Math.sqrt(N / 2);
 
@@ -39,14 +37,11 @@ export const Scene = () => {
   );
 
   return (
-    <>
-      <CameraControls />
-      <Grid />
-
-      <line>
-        <lineBasicMaterial attach="material" color={0xffffff} />
-        <bufferGeometry attach="geometry" ref={bufferRef} />
-      </line>
-    </>
+    <line>
+      <lineBasicMaterial attach="material" color={0xffffff} />
+      <bufferGeometry attach="geometry" ref={bufferRef} />
+    </line>
   );
 };
+
+export default BaseSquare;

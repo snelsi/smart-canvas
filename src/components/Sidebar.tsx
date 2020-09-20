@@ -138,17 +138,19 @@ export interface SidebarProps {
 const SidebarBase: React.FC<SidebarProps> = React.memo(
   ({ title, titleLink, sideBarHeader, menuItems = [] }) => (
     <Bar data-custom-scrollbar>
-      <div>
-        <SidebarHeader className="sideBar-header">
-          <SidebarTitle titleLink={titleLink}>{title}</SidebarTitle>
-          {sideBarHeader}
-        </SidebarHeader>
-        <ul>
-          {menuItems?.map((item) => (
-            <MenuItem key={item.fieldName} {...item} />
-          ))}
-        </ul>
-      </div>
+      <SRLWrapper>
+        <div>
+          <SidebarHeader className="sideBar-header">
+            <SidebarTitle titleLink={titleLink}>{title}</SidebarTitle>
+            {sideBarHeader}
+          </SidebarHeader>
+          <ul>
+            {menuItems?.map((item) => (
+              <MenuItem key={item.fieldName} {...item} />
+            ))}
+          </ul>
+        </div>
+      </SRLWrapper>
     </Bar>
   ),
 );
@@ -182,7 +184,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const onClose = () => setOpen(false);
 
   return (
-    <SRLWrapper options={options}>
+    <>
       <SidebarMobile>
         <Button ref={btnRef} variantColor="teal" onClick={onOpen}>
           <svg fill="currentColor" viewBox="0 0 24 24" height="24" width="24">
@@ -197,32 +199,34 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <circle cx="19" cy="19" r="2" />
           </svg>
         </Button>
-        <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}>
-          <DrawerOverlay />
-          <DrawerContent
-            p={0}
-            bg="var(--color-gray-20)"
-            color="var(--color-gray-70)"
-            overflowY="auto"
-            data-custom-scrollbar
-          >
-            <DrawerCloseButton color="var(--color-gray-70)" />
-            <DrawerHeader>
-              <SidebarTitle titleLink={titleLink}>{title}</SidebarTitle>
-            </DrawerHeader>
+        <SRLWrapper options={options}>
+          <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}>
+            <DrawerOverlay />
+            <DrawerContent
+              p={0}
+              bg="var(--color-gray-20)"
+              color="var(--color-gray-70)"
+              overflowY="auto"
+              data-custom-scrollbar
+            >
+              <DrawerCloseButton color="var(--color-gray-70)" />
+              <DrawerHeader>
+                <SidebarTitle titleLink={titleLink}>{title}</SidebarTitle>
+              </DrawerHeader>
 
-            <DrawerBody paddingBottom="64px">
-              <div>
-                <SidebarHeader className="sideBar-header">{sideBarHeader}</SidebarHeader>
-                <ul>
-                  {menuItems?.map((item) => (
-                    <MenuItem key={item.fieldName} {...item} />
-                  ))}
-                </ul>
-              </div>
-            </DrawerBody>
-          </DrawerContent>
-        </Drawer>
+              <DrawerBody paddingBottom="64px">
+                <div>
+                  <SidebarHeader className="sideBar-header">{sideBarHeader}</SidebarHeader>
+                  <ul>
+                    {menuItems?.map((item) => (
+                      <MenuItem key={item.fieldName} {...item} />
+                    ))}
+                  </ul>
+                </div>
+              </DrawerBody>
+            </DrawerContent>
+          </Drawer>
+        </SRLWrapper>
       </SidebarMobile>
 
       <SidebarBase
@@ -231,7 +235,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         sideBarHeader={sideBarHeader}
         menuItems={menuItems}
       />
-    </SRLWrapper>
+    </>
   );
 };
 
