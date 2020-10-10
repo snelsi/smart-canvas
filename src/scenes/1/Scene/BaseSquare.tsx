@@ -8,15 +8,22 @@ import { useUpdate } from "react-three-fiber";
 
 const BaseSquare = () => {
   const [N] = useField<number>(`${prefix}squareSideSize`);
+  const [cornerCircleRaduis] = useField<number>(`${prefix}cornerCircleRaduis`);
 
   const sqrtN = Math.sqrt(N / 2);
 
   const vertices = React.useMemo(() => {
+    const spaceFromCenter = sqrtN - cornerCircleRaduis;
+
     const points = [
-      [0, sqrtN],
-      [sqrtN, 0],
-      [0, -sqrtN],
-      [-sqrtN, 0],
+      [cornerCircleRaduis, spaceFromCenter],
+      [spaceFromCenter, cornerCircleRaduis],
+      [spaceFromCenter, -cornerCircleRaduis],
+      [cornerCircleRaduis, -spaceFromCenter],
+      [-cornerCircleRaduis, -spaceFromCenter],
+      [-spaceFromCenter, -cornerCircleRaduis],
+      [-spaceFromCenter, cornerCircleRaduis],
+      [-cornerCircleRaduis, spaceFromCenter],
     ];
 
     const path = new THREE.Path();
@@ -27,7 +34,7 @@ const BaseSquare = () => {
     path.closePath();
 
     return path.getPoints();
-  }, [sqrtN]);
+  }, [sqrtN, cornerCircleRaduis]);
 
   const bufferRef = useUpdate<THREE.BufferGeometry>(
     (geometry) => {

@@ -15,7 +15,6 @@ export const SideBarHeader: React.FC<SideBarHeaderProps> = () => {
         <li>R2 - Зовнiшнiй радiус центрального кола</li>
         <li>R3 - Радiус кутових кiл</li>
         <li>R4 - Радiус дiагональних кiл</li>
-        <li>D - Вiдстань вiд центра фiгури до центра кутових кiл</li>
       </ul>
     </>
   );

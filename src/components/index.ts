@@ -1,6 +1,7 @@
 export * from "./AppLayout";
 export * from "./Box";
 export * from "./CameraControls";
+export * from "./Circle";
 export * from "./Image";
 export * from "./Grid";
 export * from "./Main";
