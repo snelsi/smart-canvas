@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Box } from "components";
 import { useField } from "scripts";
 
+import { useUpdate } from "react-three-fiber";
+
 import { prefix } from ".";
+import { Controls, Figure } from "../1/Scene/Scene";
+
+const degToRad = (degrees: number) => degrees * (Math.PI / 180);
 
 export const Scene = () => {
-  const [valueX] = useField<number>(`${prefix}squareSideSize`);
-  const [size] = useField<number>(`${prefix}innerCircleRaduis`);
+  const [valueX] = useField<number>(`${prefix}x-position`);
+  const [valueY] = useField<number>(`${prefix}y-position`);
+  const [rotation] = useField<number>(`${prefix}rotation`);
+
+  const groupRef = useUpdate<THREE.Group>(
+    (geometry) => {
+      geometry.position.x = valueX;
+      geometry.position.y = valueY;
+      geometry.rotation.z = degToRad(rotation);
+    },
+    [valueX, valueY, rotation],
+  );
+
+  useEffect(() => {}, []);
 
   return (
     <>
-      <Box position={[-valueX, 0, 0]} scale={[size, size, size]} />
-      <Box position={[valueX, 0, 0]} scale={[size, size, size]} />
+      <Controls />
+      <group ref={groupRef}>
+        <Figure />
+      </group>
     </>
   );
 };
