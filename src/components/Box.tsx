@@ -1,6 +1,8 @@
 import React from "react";
 import { useFrame } from "react-three-fiber";
 
+import * as THREE from "three";
+
 export interface BoxProps {
   // extends THREE.Mesh
   position?: [number, number, number];
@@ -27,8 +29,8 @@ export const Box: React.FC<BoxProps> = (props) => {
       onPointerOut={() => setHover(false)}
       {...props}
     >
-      <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-      <meshStandardMaterial attach="material" color={hovered ? "hotpink" : "orange"} />
+      <boxBufferGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
     </mesh>
   );
 };

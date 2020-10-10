@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { useField } from "scripts";
 
+import * as THREE from "three";
 import { useUpdate } from "react-three-fiber";
 
 import { prefix } from ".";

@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import * as THREE from "three";
 import { useFrame } from "react-three-fiber";
 
 export interface TorusProps {
@@ -18,8 +19,8 @@ export const Torus: React.FC<TorusProps> = (props) => {
 
   return (
     <mesh ref={mesh} {...props}>
-      <torusKnotGeometry attach="geometry" args={[1.5, 0.2, 100, 16]} />
-      <meshBasicMaterial attach="material" color="hotpink" />
+      <torusKnotGeometry args={[1.5, 0.2, 100, 16]} />
+      <meshBasicMaterial color="hotpink" />
     </mesh>
   );
 };

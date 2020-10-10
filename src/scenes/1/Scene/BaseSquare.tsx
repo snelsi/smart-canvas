@@ -45,8 +45,8 @@ const BaseSquare = () => {
 
   return (
     <line>
-      <lineBasicMaterial attach="material" color={0xffffff} />
-      <bufferGeometry attach="geometry" ref={bufferRef} />
+      <lineBasicMaterial color={0xffffff} />
+      <bufferGeometry ref={bufferRef} />
     </line>
   );
 };

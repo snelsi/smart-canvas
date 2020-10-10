@@ -68,8 +68,8 @@ export const Circle: React.FC<CircleProps> = ({
 
   return (
     <line>
-      <lineBasicMaterial attach="material" color={color} linewidth={lineWidth} />
-      <bufferGeometry attach="geometry" ref={circleRef} />
+      <lineBasicMaterial color={color} linewidth={lineWidth} />
+      <bufferGeometry ref={circleRef} />
     </line>
   );
 };
