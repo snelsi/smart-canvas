@@ -12,6 +12,10 @@ export const CameraControls = () => {
     gl: { domElement },
   } = useThree();
 
+  React.useEffect(() => {
+    camera.position.set(0, 0, 15);
+  }, []);
+
   const controls = React.useRef();
   useFrame(() => controls.current.update());
 
