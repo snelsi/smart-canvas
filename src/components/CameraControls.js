@@ -14,7 +14,7 @@ export const CameraControls = () => {
 
   React.useEffect(() => {
     camera.position.set(0, 0, 15);
-  }, []);
+  }, [camera.position]);
 
   const controls = React.useRef();
   useFrame(() => controls.current.update());
