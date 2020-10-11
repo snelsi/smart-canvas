@@ -241,6 +241,9 @@ const MenuList = styled.ul`
       & > div {
         display: inline-block;
         text-overflow: ellipsis;
+
+        overflow: hidden;
+        width: 100%;
       }
 
       & > span.menuItem-icon {
