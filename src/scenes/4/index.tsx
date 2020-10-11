@@ -1,5 +1,5 @@
 import React from "react";
-import { MdFlipToFront } from "react-icons/md";
+import { MdAvTimer } from "react-icons/md";
 import { Scene } from "scenes";
 import { IMenuItem } from "components";
 
@@ -22,7 +22,7 @@ export const menuItems: IMenuItem[] = [
 
 export const scene: Scene = {
   title: "Деформация фигуры",
-  icon: <MdFlipToFront />,
+  icon: <MdAvTimer />,
   sideBarHeader: <SideBarHeader />,
   menuItems,
   scene: <SceneComponent />,
