@@ -12,7 +12,7 @@ export const menuItems: IMenuItem[] = [
   {
     type: "slider",
     fieldName: `${prefix}scale`,
-    title: "Розмiр",
+    title: "Размер",
     defaultValue: 1,
     minValue: 0,
     maxValue: 10,
@@ -21,7 +21,7 @@ export const menuItems: IMenuItem[] = [
   {
     type: "slider",
     fieldName: `${prefix}x-position`,
-    title: "X position",
+    title: "X координата",
     defaultValue: 0,
     minValue: -20,
     maxValue: 20,
@@ -30,7 +30,7 @@ export const menuItems: IMenuItem[] = [
   {
     type: "slider",
     fieldName: `${prefix}y-position`,
-    title: "Y position",
+    title: "Y координата",
     defaultValue: 0,
     minValue: -20,
     maxValue: 20,
@@ -39,7 +39,7 @@ export const menuItems: IMenuItem[] = [
   {
     type: "slider",
     fieldName: `${prefix}rotation`,
-    title: "Rotation",
+    title: "Поворот",
     defaultValue: 0,
     minValue: -360,
     maxValue: 360,
@@ -54,7 +54,7 @@ export const menuItems: IMenuItem[] = [
       {
         type: "slider",
         fieldName: `${prefix}z-position`,
-        title: "Z position",
+        title: "Z координата",
         defaultValue: 0,
         minValue: -20,
         maxValue: 20,
@@ -63,7 +63,7 @@ export const menuItems: IMenuItem[] = [
       {
         type: "slider",
         fieldName: `${prefix}x-rotation`,
-        title: "X Rotation",
+        title: "X Поворот",
         defaultValue: 0,
         minValue: -360,
         maxValue: 360,
@@ -72,7 +72,7 @@ export const menuItems: IMenuItem[] = [
       {
         type: "slider",
         fieldName: `${prefix}y-rotation`,
-        title: "Y Rotation",
+        title: "Y Поворот",
         defaultValue: 0,
         minValue: -360,
         maxValue: 360,
@@ -83,7 +83,7 @@ export const menuItems: IMenuItem[] = [
 ];
 
 export const scene: Scene = {
-  title: "Фiгура у просторi",
+  title: "Фигура в пространстве",
   icon: <MdTimeline />,
   sideBarHeader: <SideBarHeader />,
   menuItems,

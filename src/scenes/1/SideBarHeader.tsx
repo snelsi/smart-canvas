@@ -11,10 +11,10 @@ export const SideBarHeader: React.FC<SideBarHeaderProps> = () => {
       <Image src={FigureSvg} lightboxSource={FigureJpg} alt="Figure scheme" />
       <ul>
         <li>N - Сторона квадрата</li>
-        <li>R1 - Внутрiшнiй радiус центрального кола</li>
-        <li>R2 - Зовнiшнiй радiус центрального кола</li>
-        <li>R3 - Радiус кутових кiл</li>
-        <li>R4 - Радiус дiагональних кiл</li>
+        <li>R1 - Внутренний радиус центрального круга</li>
+        <li>R2 - Внешний радиус центрального круга</li>
+        <li>R3 - Радиус угловых кругов</li>
+        <li>R4 - Радиус диагональных кругов</li>
       </ul>
     </>
   );

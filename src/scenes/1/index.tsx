@@ -57,7 +57,7 @@ export const menuItems: IMenuItem[] = [
 ];
 
 export const scene: Scene = {
-  title: "Формування фiгури",
+  title: "Форма фигуры",
   titleLink: "tasks/lab1.pdf",
   icon: <MdBorderInner />,
   sideBarHeader: <SideBarHeader />,
