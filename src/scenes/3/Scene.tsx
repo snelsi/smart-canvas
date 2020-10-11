@@ -1,55 +1,109 @@
 import React from "react";
 
 import * as THREE from "three";
-import { useUpdate, useFrame } from "react-three-fiber";
+import { useUpdate } from "react-three-fiber";
 
-import { CameraControls } from "components";
+import { Grid, GridCameraControls } from "components";
 import { useField } from "scripts";
+import { Figure as SceneFigure } from "../2/Scene";
 import { prefix } from ".";
 
-function twistGeometry(mesh, twistAmount = 10) {
-  if (mesh?.geometry?.vertices) {
-    const quaternion = new THREE.Quaternion();
+const WorldTransform = ({ children }) => {
+  const [Syx] = useField<number>(`${prefix}Syx`);
+  const [Szx] = useField<number>(`${prefix}Szx`);
+  const [Sxy] = useField<number>(`${prefix}Sxy`);
+  const [Szy] = useField<number>(`${prefix}Szy`);
+  const [Sxz] = useField<number>(`${prefix}Sxz`);
+  const [Syz] = useField<number>(`${prefix}Syz`);
+  const SyxRef = React.useRef<number>(0);
+  const SzxRef = React.useRef<number>(0);
+  const SxyRef = React.useRef<number>(0);
+  const SzyRef = React.useRef<number>(0);
+  const SxzRef = React.useRef<number>(0);
+  const SyzRef = React.useRef<number>(0);
 
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i < mesh.geometry.vertices.length; i++) {
-      // a single vertex Y position
-      const yPos = mesh.geometry.vertices[i].y;
-      const upVec = new THREE.Vector3(0, 1, 0);
+  const geometryRef = useUpdate<THREE.BoxGeometry>(
+    (geometry) => {
+      const prevSyx = SyxRef.current;
+      const prevSzx = SzxRef.current;
+      const prevSxy = SxyRef.current;
+      const prevSzy = SzyRef.current;
+      const prevSxz = SxzRef.current;
+      const prevSyz = SyzRef.current;
 
-      quaternion.setFromAxisAngle(upVec, (Math.PI / 180) * (yPos / twistAmount));
+      const reverseMatrix = new THREE.Matrix4();
+      reverseMatrix.set(
+        1,
+        -prevSyx,
+        -prevSzx,
+        0,
+        -prevSxy,
+        1,
+        -prevSzy,
+        0,
+        -prevSxz,
+        -prevSyz,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+      );
+      geometry.applyMatrix4(reverseMatrix);
 
-      mesh.geometry.vertices[i].applyQuaternion(quaternion);
-    }
+      SyxRef.current = Syx;
+      SzxRef.current = Szx;
+      SxyRef.current = Sxy;
+      SzyRef.current = Szy;
+      SxzRef.current = Sxz;
+      SyzRef.current = Syz;
 
-    // tells Three.js to re-render this mesh
-    mesh.geometry.verticesNeedUpdate = true;
-  }
-}
+      const matrix = new THREE.Matrix4();
 
-export const Scene = () => {
-  const [twist] = useField<number>(`${prefix}twist`);
+      matrix.set(1, Syx, Szx, 0, Sxy, 1, Szy, 0, Sxz, Syz, 1, 0, 0, 0, 0, 1);
 
-  const meshRef = useUpdate<THREE.Mesh>(() => {}, []);
-
-  useFrame(() => twistGeometry(meshRef.current, twist));
+      geometry.applyMatrix4(matrix);
+    },
+    [Syx, Szx, Sxy, Szy, Sxz, Syz],
+  );
 
   return (
-    <>
-      <CameraControls />
-      <mesh ref={meshRef}>
-        <boxGeometry
-          parameters={{
-            width: 40,
-            height: 40,
-            depth: 40,
-            widthSegments: 200,
-            heightSegments: 200,
-            depthSegments: 200,
-          }}
-        />
-        <meshNormalMaterial wireframe={true} />
+    <mesh>
+      <boxGeometry ref={geometryRef} />
+      <meshBasicMaterial wireframe={true} />
+      {children}
+    </mesh>
+  );
+};
+
+export const Figure = () => {
+  const [scaleX] = useField<number>(`${prefix}scale-x`);
+  const [scaleY] = useField<number>(`${prefix}scale-y`);
+
+  const groupRef = useUpdate<THREE.Mesh>(
+    (mesh) => {
+      mesh.scale.x = scaleX;
+      mesh.scale.y = scaleY;
+    },
+    [scaleX, scaleY],
+  );
+
+  return (
+    <WorldTransform>
+      <mesh ref={groupRef}>
+        <Grid />
+        <SceneFigure />
       </mesh>
+    </WorldTransform>
+  );
+};
+
+export const Scene = () => {
+  return (
+    <>
+      <GridCameraControls />
+      <Figure />
     </>
   );
 };

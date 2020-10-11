@@ -5,10 +5,10 @@ interface SideBarHeaderProps {}
 export const SideBarHeader: React.FC<SideBarHeaderProps> = () => {
   return (
     <p>
-      <span role="img" aria-label="Cute turtle">
-        ➰
+      <span role="img" aria-label="Attention">
+        ⚠️
       </span>{" "}
-      Twist
+      Использование некоторых множителей вместе может поломать фигуру.
     </p>
   );
 };

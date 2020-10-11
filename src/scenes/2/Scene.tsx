@@ -1,16 +1,15 @@
 import React from "react";
 
-import { useField } from "scripts";
+import { useField, degToRad } from "scripts";
 
 import * as THREE from "three";
 import { useUpdate } from "react-three-fiber";
 
+import { Grid, GridCameraControls } from "components";
+import { Figure as SceneFigure } from "../1/Scene/Scene";
 import { prefix } from ".";
-import { Controls, Figure } from "../1/Scene/Scene";
 
-const degToRad = (degrees: number) => degrees * (Math.PI / 180);
-
-export const Scene = () => {
+export const Figure = () => {
   const [scale] = useField<number>(`${prefix}scale`);
   const [valueX] = useField<number>(`${prefix}x-position`);
   const [valueY] = useField<number>(`${prefix}y-position`);
@@ -48,11 +47,16 @@ export const Scene = () => {
   );
 
   return (
-    <>
-      <Controls />
-      <group ref={groupRef}>
-        <Figure />
-      </group>
-    </>
+    <group ref={groupRef}>
+      <SceneFigure />
+    </group>
   );
 };
+
+export const Scene = () => (
+  <>
+    <GridCameraControls />
+    <Grid />
+    <Figure />
+  </>
+);

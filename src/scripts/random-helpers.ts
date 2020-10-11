@@ -21,3 +21,5 @@ export const getRandomColor = (baseHue: number, hueVariance: number = defaultHue
 
   return `hsla(${hue}, ${saturation}%, ${randomInt(30, 80)}%, ${random(0.2, 0.6)})`;
 };
+
+export const degToRad = (degrees: number) => degrees * (Math.PI / 180);
