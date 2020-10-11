@@ -24,7 +24,7 @@ const defaultFields = {
   "3-Syz": 0,
   "3-rotation-x": 1,
   "3-rotation-y": 1,
-  "4-twist": 1,
+  "4-twist": 0,
 };
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions

@@ -8,6 +8,7 @@ import { useField } from "scripts";
 import { prefix } from ".";
 
 function twistGeometry(mesh, twistAmount = 10) {
+  if (twistAmount === 0) return;
   if (mesh?.geometry?.vertices) {
     const quaternion = new THREE.Quaternion();
 
@@ -17,7 +18,7 @@ function twistGeometry(mesh, twistAmount = 10) {
       const yPos = mesh.geometry.vertices[i].y;
       const upVec = new THREE.Vector3(0, 1, 0);
 
-      quaternion.setFromAxisAngle(upVec, (Math.PI / 180) * (yPos / twistAmount));
+      quaternion.setFromAxisAngle(upVec, (Math.PI / 180) * (yPos * twistAmount));
 
       mesh.geometry.vertices[i].applyQuaternion(quaternion);
     }
@@ -40,12 +41,12 @@ export const Scene = () => {
       <mesh ref={meshRef}>
         <boxGeometry
           parameters={{
-            width: 40,
-            height: 40,
-            depth: 40,
-            widthSegments: 200,
-            heightSegments: 200,
-            depthSegments: 200,
+            width: 2,
+            height: 2,
+            depth: 2,
+            widthSegments: 40,
+            heightSegments: 40,
+            depthSegments: 40,
           }}
         />
         <meshNormalMaterial wireframe={true} />

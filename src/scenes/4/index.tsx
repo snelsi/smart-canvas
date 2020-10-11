@@ -13,9 +13,9 @@ export const menuItems: IMenuItem[] = [
     type: "slider",
     fieldName: `${prefix}twist`,
     title: "Твист",
-    defaultValue: 1,
-    minValue: 0.1,
-    maxValue: 20,
+    defaultValue: 0,
+    minValue: -10,
+    maxValue: 10,
     step: 0.1,
   },
 ];
