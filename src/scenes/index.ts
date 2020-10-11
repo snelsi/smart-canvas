@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuItem } from "components";
+import { IMenuItem } from "components";
 
 import { scene as Scene1 } from "./1/index";
 import { scene as Scene2 } from "./2/index";
@@ -8,7 +8,7 @@ export interface Scene {
   title: string;
   titleLink?: string;
   icon: React.ReactElement;
-  menuItems: MenuItem[];
+  menuItems: IMenuItem[];
   initialValues?: { [key: string]: any };
   scene: React.ReactElement;
   sideBarHeader?: React.ReactElement;

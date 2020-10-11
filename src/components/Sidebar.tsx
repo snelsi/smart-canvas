@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { SRLWrapper } from "simple-react-lightbox";
 import {
   Drawer,
   DrawerOverlay,
@@ -10,8 +11,7 @@ import {
   DrawerHeader,
 } from "@chakra-ui/core";
 
-import { SRLWrapper } from "simple-react-lightbox";
-import { Slider } from "components";
+import { IMenuItem, MenuItems } from "components";
 
 const SidebarMobile = styled.div`
   @media (min-width: 801px) {
@@ -118,21 +118,11 @@ const Bar = styled.aside`
   }
 `;
 
-export type MenuItemType = "slider";
-export interface MenuItem {
-  type: MenuItemType;
-  fieldName: string;
-  title: string;
-  defaultValue?: any;
-  minValue?: number;
-  maxValue?: number;
-  step?: number;
-}
 export interface SidebarProps {
   title: string;
   titleLink?: string;
   sideBarHeader?: React.ReactElement;
-  menuItems: MenuItem[];
+  menuItems: IMenuItem[];
 }
 
 const SidebarBase: React.FC<SidebarProps> = React.memo(
@@ -144,11 +134,7 @@ const SidebarBase: React.FC<SidebarProps> = React.memo(
             <SidebarTitle titleLink={titleLink}>{title}</SidebarTitle>
             {sideBarHeader}
           </SidebarHeader>
-          <ul>
-            {menuItems?.map((item) => (
-              <MenuItem key={item.fieldName} {...item} />
-            ))}
-          </ul>
+          <MenuItems items={menuItems} />
         </div>
       </SRLWrapper>
     </Bar>
@@ -217,11 +203,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <DrawerBody paddingBottom="64px">
                 <div>
                   <SidebarHeader className="sideBar-header">{sideBarHeader}</SidebarHeader>
-                  <ul>
-                    {menuItems?.map((item) => (
-                      <MenuItem key={item.fieldName} {...item} />
-                    ))}
-                  </ul>
+                  <MenuItems items={menuItems} />
                 </div>
               </DrawerBody>
             </DrawerContent>
@@ -238,9 +220,3 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </>
   );
 };
-
-const MenuItemMemo: React.FC<MenuItem> = ({ type, ...props }) => {
-  if (type === "slider") return <Slider {...props} />;
-  return null;
-};
-export const MenuItem = React.memo(MenuItemMemo);

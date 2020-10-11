@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import { useField } from "scripts";
 
 import {
   Input,
@@ -8,8 +7,10 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
-  SliderProps as BaseSliderProps,
 } from "@chakra-ui/core";
+
+import { useField } from "scripts";
+import { SliderItem } from "components/MenuItem";
 
 const Base = styled.div`
   & .slider-header {
@@ -49,23 +50,25 @@ const Base = styled.div`
   }
 `;
 
-interface SliderProps extends BaseSliderProps {
-  title: string;
-  fieldName: string;
-  minValue?: number;
-  maxValue?: number;
+interface SliderProps {
+  item: SliderItem;
+  disabled?: boolean;
 }
 
 const SliderShouldUpdate = (prev: SliderProps, cur: SliderProps) =>
-  prev.fieldName !== cur.fieldName || prev.title !== cur.title;
+  prev.item.fieldName !== cur.item.fieldName || prev.item.title !== cur.item.title;
 
 const SliderMemo: React.FC<SliderProps> = ({
-  title = "",
-  fieldName,
-  minValue: min = 0,
-  maxValue: max = 100,
-  step = 1,
-  defaultValue = (min + max) / 2,
+  item: {
+    title = "",
+    fieldName,
+    minValue: min = 0,
+    maxValue: max = 100,
+    step = 1,
+    defaultValue = (min + max) / 2,
+    ...itemProps
+  },
+  disabled = false,
   ...props
 }) => {
   const [value, setValue] = useField<number>(fieldName);
@@ -95,6 +98,7 @@ const SliderMemo: React.FC<SliderProps> = ({
             min={min}
             max={max}
             step={step}
+            isDisabled={disabled}
           />
         </div>
       </label>
@@ -105,6 +109,8 @@ const SliderMemo: React.FC<SliderProps> = ({
         min={min}
         max={max}
         step={step}
+        isDisabled={disabled}
+        {...itemProps}
         {...props}
         key={key}
       >

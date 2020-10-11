@@ -1,14 +1,14 @@
 import React from "react";
 import { MdBorderInner } from "react-icons/md";
 import { Scene } from "scenes";
-import { MenuItem } from "components";
+import { IMenuItem } from "components";
 
 import { SideBarHeader } from "./SideBarHeader";
 import SceneComponent from "./Scene";
 
 export const prefix = "1-";
 
-export const menuItems: MenuItem[] = [
+export const menuItems: IMenuItem[] = [
   {
     type: "slider",
     fieldName: `${prefix}squareSideSize`,
@@ -57,7 +57,7 @@ export const menuItems: MenuItem[] = [
 ];
 
 export const scene: Scene = {
-  title: "Лінійні перетворення",
+  title: "Формування фiгури",
   titleLink: "tasks/lab1.pdf",
   icon: <MdBorderInner />,
   sideBarHeader: <SideBarHeader />,
