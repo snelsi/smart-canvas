@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Grid, CameraControls } from "components";
+import { Grid, GridCameraControls } from "components";
 import { BaseSquare, CentralCircle, CornerCircles, DiagonalCircles } from ".";
 
 export const Controls = () => (
   <>
-    <CameraControls />
+    <GridCameraControls />
     <Grid />
   </>
 );

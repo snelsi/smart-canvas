@@ -4,6 +4,7 @@ export * from "./CameraControls";
 export * from "./Circle";
 export * from "./Image";
 export * from "./Grid";
+export * from "./GridCameraControls";
 export * from "./Main";
 export * from "./MenuItem";
 export * from "./Logo";

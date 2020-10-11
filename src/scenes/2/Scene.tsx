@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useField } from "scripts";
 
@@ -46,8 +46,6 @@ export const Scene = () => {
     },
     [scale, valueX, valueY, rotation, showAdvanced, valueZ, rotationX, rotationY],
   );
-
-  useEffect(() => {}, []);
 
   return (
     <>
