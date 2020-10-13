@@ -1,3 +1,5 @@
+import * as THREE from "three";
+
 export const random = (a = 1, b = 0) => {
   const lower = Math.min(a, b);
   const upper = Math.max(a, b);
@@ -22,4 +24,7 @@ export const getRandomColor = (baseHue: number, hueVariance: number = defaultHue
   return `hsla(${hue}, ${saturation}%, ${randomInt(30, 80)}%, ${random(0.2, 0.6)})`;
 };
 
-export const degToRad = (degrees: number) => degrees * (Math.PI / 180);
+export const round = (num: number, precision = 100) =>
+  Math.round((num + Number.EPSILON) * precision) / precision;
+
+export const degToRad = (degrees: number) => degrees * THREE.MathUtils.DEG2RAD;

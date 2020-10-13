@@ -8,6 +8,7 @@ import { OptionalGroupItem, MenuItems } from "components";
 
 const Group = styled.div`
   margin-top: 2em;
+  margin-bottom: 1.5em;
 `;
 
 const StyledCheckbox = styled(Checkbox)`
@@ -16,10 +17,12 @@ const StyledCheckbox = styled(Checkbox)`
 `;
 
 const GroupWrapper = styled.fieldset`
+  margin-bottom: 0.5em;
   &:not([data-show="true"]) {
     height: 0;
     pointer-events: none;
     cursor: default;
+    margin-bottom: 0;
 
     & * {
       pointer-events: none !important;

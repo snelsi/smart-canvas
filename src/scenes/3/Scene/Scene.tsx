@@ -5,8 +5,8 @@ import { useUpdate } from "react-three-fiber";
 
 import { Grid, GridCameraControls } from "components";
 import { useField } from "scripts";
-import { Figure as SceneFigure } from "../2/Scene";
-import { prefix } from ".";
+import { Figure as SceneFigure } from "scenes/2/Scene";
+import { prefix } from "..";
 
 const WorldTransform = ({ children }) => {
   const [Syx] = useField<number>(`${prefix}Syx`);

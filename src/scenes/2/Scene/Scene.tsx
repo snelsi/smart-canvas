@@ -6,15 +6,16 @@ import * as THREE from "three";
 import { useUpdate } from "react-three-fiber";
 
 import { Grid, GridCameraControls } from "components";
-import { Figure as SceneFigure } from "../1/Scene/Scene";
-import { prefix } from ".";
+import { Figure as SceneFigure } from "scenes/1/Scene/Scene";
+import { ResetScene, RotateFigureAroundPoint, RotationPoint } from ".";
+import { prefix } from "..";
 
 export const Figure = () => {
   const [scale] = useField<number>(`${prefix}scale`);
   const [valueX] = useField<number>(`${prefix}x-position`);
   const [valueY] = useField<number>(`${prefix}y-position`);
 
-  const [rotation] = useField<number>(`${prefix}rotation`);
+  const [rotation] = useField<number>(`${prefix}z-rotation`);
 
   // Optional props
   const [showAdvanced] = useField<number>(`${prefix}show-advanced`);
@@ -47,7 +48,7 @@ export const Figure = () => {
   );
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} name="2RotationSceneFigure">
       <SceneFigure />
     </group>
   );
@@ -58,5 +59,10 @@ export const Scene = () => (
     <GridCameraControls />
     <Grid />
     <Figure />
+    <RotationPoint />
+
+    {/* Scripts */}
+    <RotateFigureAroundPoint />
+    <ResetScene />
   </>
 );
