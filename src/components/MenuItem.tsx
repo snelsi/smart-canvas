@@ -35,7 +35,7 @@ export interface OptionalGroupItem extends MenuItemBase {
 export interface ActionItem extends MenuItemBase {
   type: "action";
   fieldName: string;
-  defaultValue: number;
+  defaultValue?: number;
 }
 export interface DoubleInputActionItem extends MenuItemBase {
   type: "double-input-action";

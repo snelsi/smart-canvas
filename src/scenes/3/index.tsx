@@ -93,6 +93,11 @@ export const menuItems: IMenuItem[] = [
       },
     ],
   },
+  {
+    type: "action",
+    fieldName: `${prefix}reset-scene`,
+    title: "Сбросить параметры",
+  },
 ];
 
 export const scene: Scene = {

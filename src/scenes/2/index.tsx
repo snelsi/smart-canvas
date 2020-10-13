@@ -114,7 +114,6 @@ export const menuItems: IMenuItem[] = [
     type: "action",
     fieldName: `${prefix}reset-scene`,
     title: "Сбросить параметры",
-    defaultValue: 0,
   },
   // {
   //   type: "slider",

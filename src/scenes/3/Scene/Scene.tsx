@@ -6,6 +6,7 @@ import { useUpdate } from "react-three-fiber";
 import { Grid, GridCameraControls } from "components";
 import { useField } from "scripts";
 import { Figure as SceneFigure } from "scenes/2/Scene";
+import { ResetScene } from ".";
 import { prefix } from "..";
 
 const WorldTransform = ({ children }) => {
@@ -102,6 +103,8 @@ export const Scene = () => {
     <>
       <GridCameraControls />
       <Figure />
+
+      <ResetScene />
     </>
   );
 };
