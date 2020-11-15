@@ -1,6 +1,6 @@
 import * as React from "react";
-import styled from "styled-components";
-import { Checkbox } from "@chakra-ui/core";
+import styled from "@emotion/styled";
+import { Checkbox } from "@chakra-ui/react";
 
 import { useField } from "scripts";
 

@@ -14,7 +14,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+
+    // Refs: https://github.com/facebook/create-react-app/issues/9429
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["src"]
 }

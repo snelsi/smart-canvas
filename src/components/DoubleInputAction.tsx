@@ -1,8 +1,8 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import Button from "components/Button";
-import { Input } from "@chakra-ui/core";
+import { Input } from "@chakra-ui/react";
 import { useField, useAction } from "scripts";
 import { DoubleInputActionItem } from "./MenuItem";
 

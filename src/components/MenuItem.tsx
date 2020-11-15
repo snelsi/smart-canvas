@@ -78,7 +78,9 @@ interface MenuItemsProps {
 export const MenuItems: React.FC<MenuItemsProps> = ({ items, disabled = false }) => (
   <ul>
     {items?.map((item) => (
-      <MenuItem key={item.fieldName} item={item} disabled={disabled} />
+      <li key={item.fieldName}>
+        <MenuItem item={item} disabled={disabled} />
+      </li>
     ))}
   </ul>
 );

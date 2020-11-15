@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import {
   Input,
@@ -7,18 +7,21 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
 import { useField } from "scripts";
 import { SliderItem } from "components/MenuItem";
 
 const Base = styled.div`
+  padding-bottom: 11px;
+
   & .slider-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 4px;
+    margin-bottom: 9px;
     & > .slider-title {
+      display: inline-block;
       color: var(--color-gray-70);
       font-weight: 400;
       font-size: 16px;
@@ -29,7 +32,7 @@ const Base = styled.div`
       background-color: var(--color-gray-30);
       border-radius: 12px;
       color: var(--color-gray-70);
-      display: flex;
+      display: inline-flex;
       justify-content: center;
       text-align: center;
       padding: 0;
@@ -38,14 +41,17 @@ const Base = styled.div`
     }
   }
 
-  & div[data-slider-track],
-  & div[data-slider-filled-track] {
+  & .chakra-slider {
+    display: block;
+  }
+  & div.chakra-slider__track,
+  & div.chakra-slider__filled-track {
     height: 4px;
   }
-  & div[data-slider-track] {
+  & div.chakra-slider__track {
     background-color: var(--color-gray-30);
   }
-  & div[data-slider-filled-track] {
+  & div.chakra-slider__filled-track {
     background-color: var(--color-primary);
   }
 `;
@@ -82,25 +88,23 @@ const SliderMemo: React.FC<SliderProps> = ({
 
   return (
     <Base>
-      <label>
-        <div className="slider-header">
-          <div className="slider-title">{title}</div>
-          <Input
-            type="number"
-            value={value}
-            onChange={(e) => {
-              const { value } = e.target;
-              const num = Number(value);
-              setKey(num);
-              setValue(num);
-            }}
-            variant="filled"
-            min={min}
-            max={max}
-            step={step}
-            isDisabled={disabled}
-          />
-        </div>
+      <label className="slider-header">
+        <div className="slider-title">{title}</div>
+        <Input
+          type="number"
+          value={value}
+          onChange={(e) => {
+            const { value } = e.target;
+            const num = Number(value);
+            setKey(num);
+            setValue(num);
+          }}
+          variant="filled"
+          min={min}
+          max={max}
+          step={step}
+          isDisabled={disabled}
+        />
       </label>
       <BaseSlider
         value={value}
@@ -114,8 +118,9 @@ const SliderMemo: React.FC<SliderProps> = ({
         {...props}
         key={key}
       >
-        <SliderTrack />
-        <SliderFilledTrack />
+        <SliderTrack>
+          <SliderFilledTrack />
+        </SliderTrack>
         <SliderThumb />
       </BaseSlider>
     </Base>

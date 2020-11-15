@@ -1,7 +1,7 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
-import { Tooltip } from "@chakra-ui/core";
+import { Tooltip } from "@chakra-ui/react";
 import { scenes } from "scenes";
 import { Logo } from "components";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import SimpleReactLightbox from "simple-react-lightbox";
 
@@ -12,8 +12,7 @@ import "styles/index.css";
 import "styles/colors.css";
 
 ReactDOM.render(
-  <ThemeProvider>
-    <CSSReset />
+  <ChakraProvider>
     <SimpleReactLightbox>
       <Router>
         <React.StrictMode>
@@ -21,7 +20,7 @@ ReactDOM.render(
         </React.StrictMode>
       </Router>
     </SimpleReactLightbox>
-  </ThemeProvider>,
+  </ChakraProvider>,
   document.getElementById("root"),
 );
 

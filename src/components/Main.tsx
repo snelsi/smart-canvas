@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import * as React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { Canvas, extend } from "react-three-fiber";
 
 import { DragControls } from "three/examples/jsm/controls/DragControls";

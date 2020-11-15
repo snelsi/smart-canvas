@@ -1,7 +1,7 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
-import { Button as ChakraButton, ButtonProps } from "@chakra-ui/core";
+import { Button as ChakraButton, ButtonProps } from "@chakra-ui/react";
 
 const StyledButton = styled(ChakraButton)`
   &[data-force-restyle] {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { SRLWrapper } from "simple-react-lightbox";
 import {
   Drawer,
@@ -9,7 +9,7 @@ import {
   DrawerContent,
   DrawerBody,
   DrawerHeader,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
 import { IMenuItem, MenuItems } from "components";
 
@@ -172,7 +172,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       <SidebarMobile>
-        <Button ref={btnRef} variantColor="teal" onClick={onOpen}>
+        <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
           <svg fill="currentColor" viewBox="0 0 24 24" height="24" width="24">
             <circle cx="5" cy="5" r="2" />
             <circle cx="12" cy="5" r="2" />

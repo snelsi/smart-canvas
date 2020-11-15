@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export interface AppLayoutProps {}
 export const AppLayout = styled.div<AppLayoutProps>`

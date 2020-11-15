@@ -16,7 +16,7 @@ export const CameraControls = ({ ...props }) => {
   }, [camera.position]);
 
   const controls = React.useRef();
-  useFrame(() => controls.current.update());
+  useFrame(() => controls.current?.update());
 
   return <orbitControls ref={controls} args={[camera, domElement]} {...props} />;
 };
