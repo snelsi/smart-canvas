@@ -27,15 +27,22 @@ export const RotateFigureAroundPoint: React.FC<RotateFigureAroundPointProps> = (
     const anchor = scene.getObjectByName(rotationPointName);
     const object = scene.getObjectByName(objectName);
 
-    const anchorPoint = new THREE.Vector3(anchor.position.x, anchor.position.y, anchor.position.z);
+    const prevRotationX = object.rotation.x;
+    const prevRotationY = object.rotation.y;
+    const prevRotationZ = object.rotation.z;
 
-    console.clear();
+    object.rotateX(-prevRotationX);
+    object.rotateY(-prevRotationY);
+    object.rotateZ(-prevRotationZ);
+
+    const anchorPoint = new THREE.Vector3(anchor.position.x, anchor.position.y, anchor.position.z);
+    const objectPoint = new THREE.Vector3(object.position.x, object.position.y, object.position.z);
 
     // step 1: calculate move direction and move distance:
     let axis = new THREE.Vector3(
-      anchorPoint.x - object.position.x,
-      anchorPoint.y - object.position.y,
-      anchorPoint.z - object.position.z,
+      anchorPoint.x - objectPoint.x,
+      anchorPoint.y - objectPoint.y,
+      anchorPoint.z - objectPoint.z,
     );
 
     axis.normalize();
@@ -53,10 +60,14 @@ export const RotateFigureAroundPoint: React.FC<RotateFigureAroundPointProps> = (
     axis = axis.multiplyScalar(-1);
     object.translateOnAxis(axis, moveDist);
 
+    object.rotateX(prevRotationX);
+    object.rotateY(prevRotationY);
+    object.rotateZ(prevRotationZ);
+
     setState((state) => {
-      state.fields[`${prefix}x-position`] = round(object.position.x, 1000);
-      state.fields[`${prefix}y-position`] = round(object.position.y, 1000);
-      state.fields[`${prefix}z-position`] = round(object.position.z, 1000);
+      state.fields[`${prefix}x-position`] = round(object.position.x, 10000);
+      state.fields[`${prefix}y-position`] = round(object.position.y, 10000);
+      state.fields[`${prefix}z-position`] = round(object.position.z, 10000);
       state.fields[`${prefix}x-rotation`] = round(object.rotation.x * THREE.MathUtils.RAD2DEG);
       state.fields[`${prefix}x-rotation`] = round(object.rotation.y * THREE.MathUtils.RAD2DEG);
       state.fields[`${prefix}z-rotation`] = round(object.rotation.z * THREE.MathUtils.RAD2DEG);
