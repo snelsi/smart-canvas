@@ -65,16 +65,10 @@ export const DoubleInputAction: React.FC<DoubleInputActionProps> = ({
   },
   disabled = false,
 }) => {
-  const [value, setValue] = useField<number>(fieldName);
+  const [value, setValue] = useField<number>(fieldName, defaultValue);
 
   const { call: call1 } = useAction(actionOneName);
   const { call: call2 } = useAction(actionTwoName);
-
-  React.useEffect(() => {
-    if (value === undefined) {
-      setValue(defaultValue);
-    }
-  }, [value, fieldName, defaultValue, setValue]);
 
   return (
     <Wrapper>

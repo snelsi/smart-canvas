@@ -23,13 +23,13 @@ const GroupWrapper = styled.fieldset`
     pointer-events: none;
     cursor: default;
     margin-bottom: 0;
+    overflow: hidden;
 
     & * {
       pointer-events: none !important;
     }
   }
 
-  overflow: hidden;
   transition: height 0.2s ease;
 `;
 
@@ -39,10 +39,10 @@ interface OptionalGroupProps {
 }
 
 export const OptionalGroup: React.FC<OptionalGroupProps> = ({
-  item: { fieldName, title, items },
+  item: { fieldName, title, items, defaultValue },
   disabled = false,
 }) => {
-  const [showGroup, setShowGroup] = useField<boolean>(fieldName);
+  const [showGroup, setShowGroup] = useField<boolean>(fieldName, defaultValue);
 
   return (
     <Group>

@@ -2,11 +2,18 @@ import * as React from "react";
 
 import { Slider } from "components";
 import { Group } from "./Group";
+import { Switcher } from "./Switcher";
 import { OptionalGroup } from "./OptionalGroup";
 import { Action } from "./Action";
 import { DoubleInputAction } from "./DoubleInputAction";
 
-export type MenuItemType = "slider" | "group" | "optional-group" | "action" | "double-input-action";
+export type MenuItemType =
+  | "slider"
+  | "group"
+  | "switcher"
+  | "optional-group"
+  | "action"
+  | "double-input-action";
 export interface MenuItemBase {
   type: MenuItemType;
   fieldName?: string;
@@ -25,6 +32,11 @@ export interface SliderItem extends MenuItemBase {
 export interface GroupItem extends MenuItemBase {
   type: "group";
   items: IMenuItem[];
+}
+export interface SwitcherItem extends MenuItemBase {
+  type: "switcher";
+  fieldName: string;
+  defaultValue: boolean;
 }
 export interface OptionalGroupItem extends MenuItemBase {
   type: "optional-group";
@@ -50,6 +62,7 @@ export interface DoubleInputActionItem extends MenuItemBase {
 export type IMenuItem =
   | SliderItem
   | GroupItem
+  | SwitcherItem
   | OptionalGroupItem
   | ActionItem
   | DoubleInputActionItem;
@@ -62,8 +75,10 @@ const MenuItemMemo: React.FC<MenuItemProps> = ({ item, ...props }) => {
   if (!item) return null;
   if (item.type === "slider") return <Slider item={item} {...props} />;
   if (item.type === "group") return <Group item={item as GroupItem} {...props} />;
-  if (item.type === "optional-group")
+  if (item.type === "switcher") return <Switcher item={item as SwitcherItem} {...props} />;
+  if (item.type === "optional-group") {
     return <OptionalGroup item={item as OptionalGroupItem} {...props} />;
+  }
   if (item.type === "action") return <Action item={item as ActionItem} {...props} />;
   if (item.type === "double-input-action")
     return <DoubleInputAction item={item as DoubleInputActionItem} {...props} />;

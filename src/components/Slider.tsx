@@ -56,6 +56,8 @@ const Base = styled.div`
   }
 `;
 
+const isNumber = (str: string) => str.match(/^-?\d+([\.\,]\d+)?$/);
+
 interface SliderProps {
   item: SliderItem;
   disabled?: boolean;
@@ -77,14 +79,9 @@ const SliderMemo: React.FC<SliderProps> = ({
   disabled = false,
   ...props
 }) => {
-  const [value, setValue] = useField<number>(fieldName);
+  const [value, setValue] = useField<number>(fieldName, defaultValue);
+  const [inputValue, setInputValue] = React.useState<string | number>(defaultValue);
   const [key, setKey] = React.useState(value);
-
-  React.useEffect(() => {
-    if (value === undefined) {
-      setValue(defaultValue);
-    }
-  }, [value, fieldName, defaultValue, setValue]);
 
   return (
     <Base>
@@ -92,12 +89,16 @@ const SliderMemo: React.FC<SliderProps> = ({
         <div className="slider-title">{title}</div>
         <Input
           type="number"
-          value={value}
+          inputMode="decimal"
+          value={inputValue}
           onChange={(e) => {
             const { value } = e.target;
-            const num = Number(value);
-            setKey(num);
-            setValue(num);
+            setInputValue(value);
+            if (isNumber(value)) {
+              const num = Number(value);
+              setKey(num);
+              setValue(num);
+            }
           }}
           variant="filled"
           min={min}
@@ -109,7 +110,10 @@ const SliderMemo: React.FC<SliderProps> = ({
       <BaseSlider
         value={value}
         defaultValue={defaultValue}
-        onChange={setValue}
+        onChange={(v) => {
+          setValue(v);
+          setInputValue(v);
+        }}
         min={min}
         max={max}
         step={step}
