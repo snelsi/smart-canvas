@@ -63,6 +63,7 @@ export const menuItems: IMenuItem[] = [
 
 export const scene: Scene = {
   title: "Эпициклоида",
+  titleLink: "https://en.wikipedia.org/wiki/Epicycloid",
   icon: <MdToll />,
   sideBarHeader: <SideBarHeader />,
   menuItems,

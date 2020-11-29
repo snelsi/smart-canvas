@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { useUpdate } from "react-three-fiber";
 import { useField, degToRad } from "scripts";
 import { Circle, Grid, GridCameraControls } from "components";
+import { StartPoint } from "./StartPoint";
 import { Epicycloid } from ".";
 import { prefix } from "..";
 
@@ -31,8 +32,8 @@ export const Figure = () => {
   );
 
   const circleZ = React.useMemo(
-    () => (showAdvanced ? Math.sqrt((R + 2 * r) * (R + 2 * r) - R * R) : 0),
-    [showAdvanced, R, r],
+    () => (showAdvanced && showVolume ? Math.sqrt((R + 2 * r) * (R + 2 * r) - R * R) : 0),
+    [showAdvanced, showVolume, R, r],
   );
 
   return (
@@ -45,6 +46,7 @@ export const Figure = () => {
         showVolume={showAdvanced ? showVolume : false}
         pointsLimit={showAdvanced ? limits : 100000}
       />
+      <StartPoint x={R} y={0} z={circleZ} />
     </group>
   );
 };

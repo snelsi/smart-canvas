@@ -2,7 +2,6 @@ import * as React from "react";
 
 import * as THREE from "three";
 import { ReactThreeFiber, useUpdate } from "react-three-fiber";
-import { StartPoint } from "./StartPoint";
 
 interface EpicycloidProps {
   bigRadius?: number;
@@ -82,13 +81,10 @@ const Epicycloid: React.FC<EpicycloidProps> = ({
   );
 
   return (
-    <>
-      <line>
-        <lineBasicMaterial color={color} linewidth={lineWidth} />
-        <bufferGeometry ref={epicycloidRef} />
-      </line>
-      <StartPoint x={R} y={0} />
-    </>
+    <line>
+      <lineBasicMaterial color={color} linewidth={lineWidth} />
+      <bufferGeometry ref={epicycloidRef} />
+    </line>
   );
 };
 
