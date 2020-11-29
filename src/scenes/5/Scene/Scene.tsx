@@ -30,9 +30,14 @@ export const Figure = () => {
     [rotation, showAdvanced],
   );
 
+  const circleZ = React.useMemo(
+    () => (showAdvanced ? Math.sqrt((R + 2 * r) * (R + 2 * r) - R * R) : 0),
+    [showAdvanced, R, r],
+  );
+
   return (
     <group ref={groupRef}>
-      <Circle radius={R} color={0x00ffc2} />
+      <Circle radius={R} z={circleZ} color={0x00ffc2} />
       <Epicycloid
         bigRadius={R}
         smallRadius={r}
