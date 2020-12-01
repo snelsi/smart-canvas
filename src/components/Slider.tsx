@@ -56,7 +56,7 @@ const Base = styled.div`
   }
 `;
 
-const isNumber = (str: string) => str.match(/^-?\d+([\.\,]\d+)?$/);
+const isNumber = (str: string) => /^-?\d+([\.\,]\d+)?$/.test(str) || /^[\.\,]\d+$/.test(str);
 
 interface SliderProps {
   item: SliderItem;
