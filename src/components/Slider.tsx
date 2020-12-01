@@ -83,6 +83,12 @@ const SliderMemo: React.FC<SliderProps> = ({
   const [inputValue, setInputValue] = React.useState<string | number>(defaultValue);
   const [key, setKey] = React.useState(value);
 
+  React.useEffect(() => {
+    if (inputValue !== value) {
+      setInputValue(value);
+    }
+  }, [value]);
+
   return (
     <Base>
       <label className="slider-header">
