@@ -22,15 +22,15 @@ const StyledWrapper = styled.div`
   }
 `;
 
-interface ImageProps {
+interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   lightboxSource?: string;
   alt: string;
 }
-export const Image: React.FC<ImageProps> = ({ src, alt = "" }) => {
+export const Image: React.FC<ImageProps> = ({ src, alt = "", ...props }) => {
   return (
     <StyledWrapper className="image-component">
-      <img src={src} alt={alt} />
+      <img src={src} alt={alt} {...props} />
     </StyledWrapper>
   );
 };

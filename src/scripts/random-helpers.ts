@@ -28,3 +28,5 @@ export const round = (num: number, precision = 100) =>
   Math.round((num + Number.EPSILON) * precision) / precision;
 
 export const degToRad = (degrees: number) => degrees * THREE.MathUtils.DEG2RAD;
+
+export const isNumber = (str: string) => /^-?\d+([\.\,]\d+)?$/.test(str) || /^[\.\,]\d+$/.test(str);

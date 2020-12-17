@@ -9,7 +9,7 @@ import {
   SliderThumb,
 } from "@chakra-ui/react";
 
-import { useField } from "scripts";
+import { useField, isNumber } from "scripts";
 import { SliderItem } from "components/MenuItem";
 
 const Base = styled.div`
@@ -55,9 +55,6 @@ const Base = styled.div`
     background-color: var(--color-primary);
   }
 `;
-
-const isNumber = (str: string) => /^-?\d+([\.\,]\d+)?$/.test(str) || /^[\.\,]\d+$/.test(str);
-
 interface SliderProps {
   item: SliderItem;
   disabled?: boolean;

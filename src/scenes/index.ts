@@ -6,6 +6,7 @@ import { scene as Scene2 } from "./2/index";
 import { scene as Scene3 } from "./3/index";
 import { scene as Scene4 } from "./4/index";
 import { scene as Scene5 } from "./5/index";
+import { scene as Scene6 } from "./6/index";
 
 export interface Scene {
   title: string;
@@ -22,4 +23,5 @@ export const scenes: { [key: string]: Scene } = {
   "/3": Scene3,
   "/4": Scene4,
   "/5": Scene5,
+  "/6": Scene6,
 };
