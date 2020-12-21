@@ -4,7 +4,8 @@ import * as THREE from "three";
 import { useThree } from "react-three-fiber";
 import { OrbitControls } from "@react-three/drei/OrbitControls";
 
-export const dragContext = React.createContext([null, (newValue: any) => {}]);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const dragContext = React.createContext([null, (_newValue: any) => {}]);
 
 export const DragContext = ({
   children,
