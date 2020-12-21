@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { Checkbox } from "@chakra-ui/react";
+import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
 
 import { useField } from "scripts";
 
@@ -23,12 +23,10 @@ export const Switcher: React.FC<SwitcherProps> = ({
   const [checked, setChecked] = useField<boolean>(fieldName, defaultValue);
 
   return (
-    <StyledCheckbox
-      isChecked={checked}
-      onChange={(e) => setChecked(e.target.checked)}
-      isDisabled={disabled}
-    >
-      {title}
-    </StyledCheckbox>
+    <CheckboxGroup value={checked ? ["1"] : []} onChange={(st) => setChecked(st.length > 0)}>
+      <StyledCheckbox value="1" isDisabled={disabled}>
+        {title}
+      </StyledCheckbox>
+    </CheckboxGroup>
   );
 };
