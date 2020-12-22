@@ -30,3 +30,9 @@ export const round = (num: number, precision = 100) =>
 export const degToRad = (degrees: number) => degrees * THREE.MathUtils.DEG2RAD;
 
 export const isNumber = (str: string) => /^-?\d+([\.\,]\d+)?$/.test(str) || /^[\.\,]\d+$/.test(str);
+
+export const remove = (array, index) => {
+  const arr = [...array];
+  arr.splice(index, 1);
+  return arr;
+};

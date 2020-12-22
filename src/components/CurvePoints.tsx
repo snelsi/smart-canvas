@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 
 import { Input } from "@chakra-ui/react";
 import { v4 as uuid } from "uuid";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdClose } from "react-icons/md";
 import Button from "components/Button";
 
-import { useField, useClickOutside, isNumber } from "scripts";
+import { useField, useClickOutside, isNumber, remove } from "scripts";
 import { CurveItem } from "./MenuItem";
 import { ICurve, IPoint } from "scenes/6/Scene/Curve";
 
@@ -100,11 +100,26 @@ const CurveWrapper = styled.div`
   gap: 8px;
   overflow: hidden;
 
-  padding: var(--shift);
-  margin: -var(--shift);
+  padding: var(--shift) 0;
 
   &[data-focused="true"] {
     border-color: var(--color-primary);
+  }
+  & > button.delete-button {
+    &:not(:hover) {
+      background: transparent;
+    }
+    border-radius: 4px;
+    color: var(--color-gray-70);
+    height: 32px;
+    min-width: 32px;
+    padding: 0;
+    width: 100%;
+
+    & > svg {
+      height: 20px;
+      width: 20px;
+    }
   }
 `;
 interface CurveProps {
@@ -131,6 +146,7 @@ const Curve: React.FC<CurveProps> = ({ curve, onChange }) => {
     },
     [curve.points],
   );
+  const deleteCurve = () => onChange(null);
 
   const focused = focus === curve.id;
   const focusCurve = React.useCallback(() => setFocused(curve.id), [curve.id]);
@@ -152,6 +168,9 @@ const Curve: React.FC<CurveProps> = ({ curve, onChange }) => {
         onChange={(num, coord) => onChange(updateCurCurve(num, "2", coord))}
         onFocus={focusCurve}
       />
+      <Button className="delete-button" onClick={deleteCurve}>
+        <MdClose />
+      </Button>
     </CurveWrapper>
   );
 };
@@ -199,14 +218,18 @@ export const CurvePoints: React.FC<CurvePointsProps> = ({
             key={curve.id}
             curve={curve}
             onChange={(newCurv) => {
-              const newState = curves.map((curve) => ({ ...curve })) || [];
-              newState[i] = newCurv;
-              setValue(newState);
+              if (!newCurv) {
+                setValue(remove(curves, i));
+              } else {
+                const newState = curves.map((curve) => ({ ...curve })) || [];
+                newState[i] = newCurv;
+                setValue(newState);
+              }
             }}
           />
         ))}
       </div>
-      <Button onClick={createNewCurve} className="add-new-btn">
+      <Button onClick={createNewCurve} className="add-new-btn" data-icon>
         <MdAdd />
       </Button>
     </Wrapper>
