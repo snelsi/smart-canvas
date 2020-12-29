@@ -4,6 +4,7 @@ import { useField } from "scripts";
 import { GridCameraControls } from "components";
 import { prefix } from "..";
 import { Figure as SceneFigure } from "./Figure";
+import { LatheFigure } from "./LatheFigure";
 import { RenderSide } from "./RenderSide";
 import { ProjectionWrapper } from "./ProjectionWrapper";
 
