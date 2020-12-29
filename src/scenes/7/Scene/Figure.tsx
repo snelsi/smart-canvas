@@ -16,6 +16,8 @@ const TextureMaterial = () => {
   return <meshPhongMaterial attach="material" map={texture} />;
 };
 
+const Fallback = () => null;
+
 export interface FigureProps {
   // extends THREE.Mesh
   positionX?: number;
@@ -56,14 +58,16 @@ export const Figure: React.FC<FigureProps> = ({
   });
 
   return (
-    <mesh
-      ref={mesh}
-      position={[positionX, positionY, positionZ]}
-      scale={[scaleX, scaleY, scaleZ]}
-      {...props}
-    >
-      <torusKnotGeometry args={[radius, tube, tubularSegments, radialSegments]} />
-      {useTexture ? <TextureMaterial /> : <meshNormalMaterial color="hotpink" />}
-    </mesh>
+    <React.Suspense fallback={<Fallback />}>
+      <mesh
+        ref={mesh}
+        position={[positionX, positionY, positionZ]}
+        scale={[scaleX, scaleY, scaleZ]}
+        {...props}
+      >
+        <torusKnotGeometry args={[radius, tube, tubularSegments, radialSegments]} />
+        {useTexture ? <TextureMaterial /> : <meshNormalMaterial color="hotpink" />}
+      </mesh>
+    </React.Suspense>
   );
 };

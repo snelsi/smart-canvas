@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { useField } from "scripts";
-import { Grid, GridCameraControls } from "components";
+import { GridCameraControls } from "components";
 import { prefix } from "..";
 import { Figure as SceneFigure } from "./Figure";
 import { RenderSide } from "./RenderSide";
@@ -53,13 +53,11 @@ export const Figure = () => {
   );
 };
 
-const Fallback = () => <Grid />;
-
 const Scene: React.FC = () => (
-  <React.Suspense fallback={<Fallback />}>
+  <>
     <Controls />
     <Figure />
-  </React.Suspense>
+  </>
 );
 
 export default Scene;
