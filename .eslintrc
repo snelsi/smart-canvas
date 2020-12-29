@@ -13,6 +13,8 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-empty-interface": "off",
-    "jsx-a11y/label-has-associated-control": "off"
+    "jsx-a11y/label-has-associated-control": "off",
+    "@typescript-eslint/no-unnecessary-type-constraint": "off",
+    "no-unsafe-optional-chaining": "off"
   }
 }
