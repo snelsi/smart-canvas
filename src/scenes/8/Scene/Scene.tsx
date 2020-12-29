@@ -48,12 +48,7 @@ export const Figure = () => {
         <SceneFigure />
       </ProjectionWrapper>
 
-      <SceneFigure
-        positionX={posX}
-        positionY={posY }
-        positionZ={posZ}
-        useTexture={useTexture}
-      />
+      <SceneFigure positionX={posX} positionY={posY} positionZ={posZ} useTexture={useTexture} />
     </>
   );
 };

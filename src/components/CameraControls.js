@@ -5,14 +5,14 @@ import { extend, useFrame, useThree } from "react-three-fiber";
 
 extend({ OrbitControls });
 
-export const CameraControls = ({ ...props }) => {
+export const CameraControls = ({ defaultX = 0, defaultY = 0, defaultZ = 15, ...props }) => {
   const {
     camera,
     gl: { domElement },
   } = useThree();
 
   React.useEffect(() => {
-    camera.position.set(0, 0, 15);
+    camera.position.set(defaultX, defaultY, defaultZ);
   }, [camera.position]);
 
   const controls = React.useRef();
