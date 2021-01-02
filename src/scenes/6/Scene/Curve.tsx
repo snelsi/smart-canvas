@@ -25,7 +25,7 @@ const getColor = (i: number) => {
 
 export interface ICurve {
   id: number | string;
-  points: [IPoint, IPoint, IPoint];
+  points: IPoint[];
 }
 interface CurveProps {
   curve: ICurve;

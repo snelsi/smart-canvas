@@ -8,6 +8,7 @@ import { Action } from "./Action";
 import { DoubleAction } from "./DoubleAction";
 import { DoubleInputAction } from "./DoubleInputAction";
 import { CurvePoints } from "./CurvePoints";
+import { CubicCurvePoints } from "./CubicCurvePoints";
 
 export type MenuItemType =
   | "slider"
@@ -17,7 +18,8 @@ export type MenuItemType =
   | "action"
   | "double-action"
   | "double-input-action"
-  | "curve-points";
+  | "curve-points"
+  | "cubic-curve-points";
 export interface MenuItemBase {
   type: MenuItemType;
   fieldName?: string;
@@ -74,6 +76,10 @@ export interface CurveItem extends MenuItemBase {
   type: "curve-points";
   fieldName: string;
 }
+export interface CubicCurveItem extends MenuItemBase {
+  type: "cubic-curve-points";
+  fieldName: string;
+}
 
 export type IMenuItem =
   | SliderItem
@@ -83,7 +89,8 @@ export type IMenuItem =
   | ActionItem
   | DoubleActionItem
   | DoubleInputActionItem
-  | CurveItem;
+  | CurveItem
+  | CubicCurveItem;
 
 interface MenuItemProps {
   item: IMenuItem;
@@ -103,6 +110,8 @@ const MenuItemMemo: React.FC<MenuItemProps> = ({ item, ...props }) => {
   if (item.type === "double-input-action")
     return <DoubleInputAction item={item as DoubleInputActionItem} {...props} />;
   if (item.type === "curve-points") return <CurvePoints item={item as CurveItem} {...props} />;
+  if (item.type === "cubic-curve-points")
+    return <CubicCurvePoints item={item as CubicCurveItem} {...props} />;
   return null;
 };
 export const MenuItem = React.memo(MenuItemMemo);
