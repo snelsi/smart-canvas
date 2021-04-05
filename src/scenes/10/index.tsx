@@ -97,8 +97,8 @@ export const menuItems: IMenuItem[] = [
         fieldName: `${prefix}x-position`,
         title: "X координата",
         defaultValue: 0,
-        minValue: -100,
-        maxValue: 100,
+        minValue: -40,
+        maxValue: 40,
         step: 1,
       },
       {
@@ -106,8 +106,8 @@ export const menuItems: IMenuItem[] = [
         fieldName: `${prefix}y-position`,
         title: "Y координата",
         defaultValue: 0,
-        minValue: -100,
-        maxValue: 100,
+        minValue: -40,
+        maxValue: 40,
         step: 1,
       },
       {
@@ -115,8 +115,8 @@ export const menuItems: IMenuItem[] = [
         fieldName: `${prefix}z-position`,
         title: "Z координата",
         defaultValue: 0,
-        minValue: -100,
-        maxValue: 100,
+        minValue: -40,
+        maxValue: 40,
         step: 1,
       },
       {

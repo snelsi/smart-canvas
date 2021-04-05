@@ -15,12 +15,12 @@ export const Controls = () => (
 );
 
 const curve = [
-  { x: 2, y: 0 },
-  { x: 2.2, y: 0.4 },
+  { x: 3.4, y: 0 },
+  { x: 2.2, y: 0.5 },
   { x: 2.8, y: 1 },
-  { x: 4, y: 1.6 },
+  { x: 3, y: 2 },
   { x: 2.8, y: 2.6 },
-  { x: 1.5, y: 3.8 },
+  { x: 1.8, y: 3.5 },
 ];
 
 export const Figure = () => {
@@ -57,10 +57,11 @@ export const Figure = () => {
   useHelper(showHelpers ? mesh : { current: null }, THREE.BoxHelper, "royalblue");
   useHelper(showHelpers ? mesh : { current: null }, VertexNormalsHelper, 1, "red");
 
-  const position = React.useMemo(
-    () => new THREE.Vector3(degToRad(valueX), degToRad(valueY), degToRad(valueZ)),
-    [valueX, valueY, valueZ],
-  );
+  const position = React.useMemo(() => new THREE.Vector3(valueX, valueY, valueZ), [
+    valueX,
+    valueY,
+    valueZ,
+  ]);
   const rotation = React.useMemo(
     () => new THREE.Euler(degToRad(rotationX), degToRad(rotationY), degToRad(rotationZ)),
     [rotationX, rotationY, rotationZ],

@@ -61,9 +61,9 @@ const useTexture = () => {
       if (cam.current) {
         cam.current.position.x = valueX;
         cam.current.position.y = valueY;
-      }
-      if (animation) {
-        cam.current.position.z = 5 + Math.sin(state.clock.getElapsedTime() * 1.5) * 2;
+        if (animation) {
+          cam.current.position.z = 5 + Math.sin(state.clock.getElapsedTime() * 1.5) * 2;
+        }
       }
     }
     state.gl.setRenderTarget(target);
@@ -91,7 +91,7 @@ const Light = () => {
   const [lightIntensity] = useField<number>(`${prefix}lightIntensity`);
 
   if (!showLight) return null;
-  return <directionalLight args={[lightColor, lightIntensity]} position={[posX, posY, posZ]} />;
+  return <spotLight args={[lightColor, lightIntensity]} position={[posX, posY, posZ]} />;
 };
 
 const Drop = ({ map, wireframe = false }) => {
@@ -110,7 +110,6 @@ const Drop = ({ map, wireframe = false }) => {
       // const u = -Math.PI / 2 + up * Math.PI;
       const u = up * 2 * Math.PI;
       const v = -Math.PI / 2 + vp * Math.PI;
-      // const v = vp * 2 * Math.PI;
 
       const r = a * (1 - Math.sin(v)) * Math.cos(v);
 
