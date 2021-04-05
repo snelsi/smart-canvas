@@ -66,9 +66,11 @@ const useTexture = () => {
         }
       }
     }
-    state.gl.setRenderTarget(target);
-    state.gl.render(scene, cam.current);
-    state.gl.setRenderTarget(null);
+    try {
+      state.gl.setRenderTarget(target);
+      state.gl.render(scene, cam.current);
+      state.gl.setRenderTarget(null);
+    } catch {}
   });
 
   return {
