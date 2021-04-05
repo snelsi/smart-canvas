@@ -161,8 +161,6 @@ export const CubicCurvePoints: React.FC<CubicCurvePointsProps> = ({
                       })
                       .concat(newState[i].points.slice(2));
                     newState.splice(i, 1);
-                    console.clear();
-                    console.log(newState);
                     setValue(newState);
                   }
                 : undefined

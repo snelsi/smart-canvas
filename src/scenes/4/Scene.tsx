@@ -1,45 +1,27 @@
 import React from "react";
 
 import * as THREE from "three";
-import { useUpdate, useFrame } from "react-three-fiber";
+import { useFrame } from "@react-three/fiber";
 
 import { CameraControls } from "components";
 import { useField } from "scripts";
 import { prefix } from ".";
 
-function twistGeometry(mesh, twistAmount = 10) {
+function twistGeometry(geometry: THREE.BoxGeometry, twistAmount = 10) {
   if (twistAmount === 0) return;
-  if (mesh?.geometry?.vertices) {
-    const quaternion = new THREE.Quaternion();
-
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i < mesh.geometry.vertices.length; i++) {
-      // a single vertex Y position
-      const yPos = mesh.geometry.vertices[i].y;
-      const upVec = new THREE.Vector3(0, 1, 0);
-
-      quaternion.setFromAxisAngle(upVec, (Math.PI / 180) * (yPos * twistAmount));
-
-      mesh.geometry.vertices[i].applyQuaternion(quaternion);
-    }
-
-    // tells Three.js to re-render this mesh
-    mesh.geometry.verticesNeedUpdate = true;
-  }
 }
 
 export const Scene = () => {
   const [twist] = useField<number>(`${prefix}twist`);
 
-  const meshRef = useUpdate<THREE.Mesh>(() => {}, []);
-
-  useFrame(() => twistGeometry(meshRef.current, twist));
+  const geometryRef = React.useRef<THREE.BoxGeometry>();
 
   return (
     <>
       <CameraControls />
-      <mesh ref={meshRef}>
+      <mesh>
         <boxGeometry
+          ref={geometryRef}
           parameters={{
             width: 2,
             height: 2,

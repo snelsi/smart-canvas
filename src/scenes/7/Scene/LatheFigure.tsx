@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import * as THREE from "three";
-import { useFrame, useLoader, useUpdate } from "react-three-fiber";
+import { useLoader } from "@react-three/fiber";
 import textureUrl from "../figure-white.jpg";
 
 const TextureMaterial = () => {

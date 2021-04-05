@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import * as THREE from "three";
-import { ReactThreeFiber, useUpdate } from "react-three-fiber";
+import { ReactThreeFiber } from "@react-three/fiber";
 
 interface CircleProps {
   radius?: number;
@@ -59,12 +59,10 @@ export const Circle: React.FC<CircleProps> = ({
     }
   }, [radius, x, y, z, startAngle, correctedEndAngle, useArc]);
 
-  const circleRef = useUpdate<THREE.BufferGeometry>(
-    (geometry) => {
-      geometry.setFromPoints(circlePoints);
-    },
-    [circlePoints],
-  );
+  const circleRef = React.useRef<THREE.BufferGeometry>();
+  React.useLayoutEffect(() => {
+    circleRef?.current?.setFromPoints(circlePoints);
+  }, [circlePoints]);
 
   return (
     <line>

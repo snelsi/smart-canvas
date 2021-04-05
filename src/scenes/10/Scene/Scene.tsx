@@ -1,35 +1,94 @@
 import * as React from "react";
+import * as THREE from "three";
+import { VertexNormalsHelper } from "three-stdlib";
+import { Environment, Lathe, useHelper } from "@react-three/drei";
 
-import { useField } from "scripts";
-import { Grid } from "components";
-import { ICurve, Curve } from "./Curve";
+import { useField, degToRad, getPointRecursive } from "scripts";
+import { CameraControls } from "components";
 import { prefix } from "..";
-import { DragContext } from "scripts/useDrag";
 
-export const Controls = () => <Grid />;
+export const Controls = () => (
+  <>
+    <axesHelper args={[10]} />
+    <CameraControls />
+  </>
+);
+
+const curve = [
+  { x: 2, y: 0 },
+  { x: 2.2, y: 0.4 },
+  { x: 2.8, y: 1 },
+  { x: 4, y: 1.6 },
+  { x: 2.8, y: 2.6 },
+  { x: 1.5, y: 3.8 },
+];
 
 export const Figure = () => {
-  const [curves, setValue] = useField<ICurve[]>(`${prefix}curves`);
+  const [preset] = useField<string>(`${prefix}preset`);
+  const [segments] = useField<number>(`${prefix}segments`);
+  const [phiStart] = useField<number>(`${prefix}phiStart`);
+  const [phiLength] = useField<number>(`${prefix}phiLength`);
+  const [color] = useField<string>(`${prefix}color`);
+  const [showHelpers] = useField<boolean>(`${prefix}showHelpers`);
+
+  const [scale] = useField<number>(`${prefix}scale`);
+  const [valueX] = useField<number>(`${prefix}x-position`);
+  const [valueY] = useField<number>(`${prefix}y-position`);
+  const [valueZ] = useField<number>(`${prefix}z-position`);
+  const [rotationX] = useField<number>(`${prefix}x-rotation`);
+  const [rotationY] = useField<number>(`${prefix}y-rotation`);
+  const [rotationZ] = useField<number>(`${prefix}z-rotation`);
+  const [k] = useField<number>(`${prefix}k`);
+
+  const mesh = React.useRef<THREE.Mesh>();
+
+  const points = React.useMemo(() => {
+    const _points: THREE.Vector2[] = [];
+
+    for (let i = 0; i <= k; i += 1) {
+      const percent = (i / k) * 100;
+      const [p] = getPointRecursive(curve, percent);
+      _points.push(new THREE.Vector2(p.x, p.y));
+    }
+
+    return _points;
+  }, [curve, k]);
+
+  useHelper(showHelpers ? mesh : { current: null }, THREE.BoxHelper, "royalblue");
+  useHelper(showHelpers ? mesh : { current: null }, VertexNormalsHelper, 1, "red");
+
+  const position = React.useMemo(
+    () => new THREE.Vector3(degToRad(valueX), degToRad(valueY), degToRad(valueZ)),
+    [valueX, valueY, valueZ],
+  );
+  const rotation = React.useMemo(
+    () => new THREE.Euler(degToRad(rotationX), degToRad(rotationY), degToRad(rotationZ)),
+    [rotationX, rotationY, rotationZ],
+  );
 
   return (
-    <DragContext>
-      <group>
-        {curves?.map?.((curve, i) => (
-          <Curve
-            curve={curve}
-            key={curve.id}
-            onChange={(newCurve) => {
-              setValue(
-                curves.map((curv, ind) => {
-                  if (i === ind) return newCurve;
-                  return curv;
-                }),
-              );
-            }}
-          />
-        ))}
-      </group>
-    </DragContext>
+    <>
+      <React.Suspense fallback={null}>
+        <Environment
+          preset={preset === "none" ? "sunset" : preset}
+          background={preset && preset !== "none"}
+        />
+      </React.Suspense>
+      <Lathe
+        ref={mesh}
+        args={[points, segments, degToRad(phiStart), degToRad(phiLength)]}
+        position={position}
+        rotation={rotation}
+        scale={scale}
+      >
+        <meshStandardMaterial
+          metalness={0.2}
+          roughness={0.2}
+          side={THREE.DoubleSide}
+          color={color}
+        />
+      </Lathe>
+    </>
   );
 };
 

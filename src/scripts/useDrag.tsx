@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import * as THREE from "three";
-import { useThree } from "react-three-fiber";
-import { OrbitControls } from "@react-three/drei/OrbitControls";
+import { useThree } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const dragContext = React.createContext([null, (_newValue: any) => {}]);
@@ -25,13 +25,14 @@ export const DragContext = ({
     THREE: THREE.TOUCH.ROTATE,
   },
 }) => {
-  const { gl, camera } = useThree();
+  const { camera } = useThree();
   const api = React.useState<any>(true);
 
   return (
     <>
+      {/* @ts-ignore */}
       <OrbitControls
-        args={[camera, gl.domElement]}
+        camera={camera}
         enableDamping={false}
         enabled={api[0]}
         enableZoom={enableZoom}

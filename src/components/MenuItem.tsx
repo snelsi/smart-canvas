@@ -3,17 +3,23 @@ import * as React from "react";
 import { Slider } from "components";
 import { Group } from "./Group";
 import { Switcher } from "./Switcher";
+import { Tab } from "./Tab";
 import { OptionalGroup } from "./OptionalGroup";
 import { Action } from "./Action";
 import { DoubleAction } from "./DoubleAction";
 import { DoubleInputAction } from "./DoubleInputAction";
 import { CurvePoints } from "./CurvePoints";
 import { CubicCurvePoints } from "./CubicCurvePoints";
+import { Select } from "./Select";
+import { Color } from "./Color";
 
 export type MenuItemType =
   | "slider"
+  | "select"
+  | "color"
   | "group"
   | "switcher"
+  | "tab"
   | "optional-group"
   | "action"
   | "double-action"
@@ -35,6 +41,13 @@ export interface SliderItem extends MenuItemBase {
   fieldName: string;
   defaultValue: number;
 }
+export interface SelectItem extends MenuItemBase {
+  type: "select";
+  fieldName: string;
+  defaultValue?: string;
+  options: string[];
+  placeholder?: string;
+}
 export interface GroupItem extends MenuItemBase {
   type: "group";
   items: IMenuItem[];
@@ -43,6 +56,15 @@ export interface SwitcherItem extends MenuItemBase {
   type: "switcher";
   fieldName: string;
   defaultValue: boolean;
+}
+export interface ColorItem extends MenuItemBase {
+  type: "color";
+  fieldName: string;
+  defaultValue: string;
+}
+export interface TabItem extends MenuItemBase {
+  type: "tab";
+  items: IMenuItem[];
 }
 export interface OptionalGroupItem extends MenuItemBase {
   type: "optional-group";
@@ -83,8 +105,11 @@ export interface CubicCurveItem extends MenuItemBase {
 
 export type IMenuItem =
   | SliderItem
+  | SelectItem
   | GroupItem
   | SwitcherItem
+  | ColorItem
+  | TabItem
   | OptionalGroupItem
   | ActionItem
   | DoubleActionItem
@@ -99,8 +124,11 @@ interface MenuItemProps {
 const MenuItemMemo: React.FC<MenuItemProps> = ({ item, ...props }) => {
   if (!item) return null;
   if (item.type === "slider") return <Slider item={item} {...props} />;
+  if (item.type === "select") return <Select item={item} {...props} />;
   if (item.type === "group") return <Group item={item as GroupItem} {...props} />;
   if (item.type === "switcher") return <Switcher item={item as SwitcherItem} {...props} />;
+  if (item.type === "color") return <Color item={item as ColorItem} {...props} />;
+  if (item.type === "tab") return <Tab item={item as TabItem} {...props} />;
   if (item.type === "optional-group") {
     return <OptionalGroup item={item as OptionalGroupItem} {...props} />;
   }

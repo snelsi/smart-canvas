@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import * as THREE from "three";
-import { ReactThreeFiber, useUpdate } from "react-three-fiber";
+import { ReactThreeFiber } from "@react-three/fiber";
 import { useField, useDebounce } from "scripts";
 import { Point } from "./Point";
 import { prefix } from "..";
@@ -72,12 +72,10 @@ export const Curve: React.FC<CurveProps> = ({
     return points;
   }, [curve.points]);
 
-  const curveRef = useUpdate<THREE.BufferGeometry>(
-    (geometry) => {
-      geometry.setFromPoints(curvePoints);
-    },
-    [curvePoints],
-  );
+  const curveRef = React.useRef<THREE.BufferGeometry>();
+  React.useLayoutEffect(() => {
+    curveRef?.current?.setFromPoints(curvePoints);
+  }, [curvePoints]);
 
   const showPoints = focused;
 

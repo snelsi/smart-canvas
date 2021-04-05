@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ReactThreeFiber } from "react-three-fiber";
+import { ReactThreeFiber } from "@react-three/fiber";
 import { useHover, useDrag, round } from "scripts";
 
 interface PointProps {

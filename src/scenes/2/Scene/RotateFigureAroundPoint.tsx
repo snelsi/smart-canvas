@@ -2,7 +2,7 @@ import * as React from "react";
 
 import * as THREE from "three";
 import shallow from "zustand/shallow";
-import { useThree } from "react-three-fiber";
+import { useThree } from "@react-three/fiber";
 
 import { useStore } from "AppContext";
 import { useField, useAction, degToRad, round } from "scripts";

@@ -1,29 +1,26 @@
 import React from "react";
-
-import { useField } from "scripts";
-
-import { prefix } from "..";
 import * as THREE from "three";
-import { useUpdate } from "react-three-fiber";
+import { useField } from "scripts";
+import { prefix } from "..";
 
 const BaseSquare = () => {
   const [N] = useField<number>(`${prefix}squareSideSize`);
-  const [cornerCircleRaduis] = useField<number>(`${prefix}cornerCircleRaduis`);
+  const [cornerCircleRadius] = useField<number>(`${prefix}cornerCircleRaduis`);
 
   const sqrtN = Math.sqrt(N / 2);
 
   const vertices = React.useMemo(() => {
-    const spaceFromCenter = sqrtN - cornerCircleRaduis;
+    const spaceFromCenter = sqrtN - cornerCircleRadius;
 
     const points = [
-      [cornerCircleRaduis, spaceFromCenter],
-      [spaceFromCenter, cornerCircleRaduis],
-      [spaceFromCenter, -cornerCircleRaduis],
-      [cornerCircleRaduis, -spaceFromCenter],
-      [-cornerCircleRaduis, -spaceFromCenter],
-      [-spaceFromCenter, -cornerCircleRaduis],
-      [-spaceFromCenter, cornerCircleRaduis],
-      [-cornerCircleRaduis, spaceFromCenter],
+      [cornerCircleRadius, spaceFromCenter],
+      [spaceFromCenter, cornerCircleRadius],
+      [spaceFromCenter, -cornerCircleRadius],
+      [cornerCircleRadius, -spaceFromCenter],
+      [-cornerCircleRadius, -spaceFromCenter],
+      [-spaceFromCenter, -cornerCircleRadius],
+      [-spaceFromCenter, cornerCircleRadius],
+      [-cornerCircleRadius, spaceFromCenter],
     ];
 
     const path = new THREE.Path();
@@ -34,14 +31,12 @@ const BaseSquare = () => {
     path.closePath();
 
     return path.getPoints();
-  }, [sqrtN, cornerCircleRaduis]);
+  }, [sqrtN, cornerCircleRadius]);
 
-  const bufferRef = useUpdate<THREE.BufferGeometry>(
-    (geometry) => {
-      geometry.setFromPoints(vertices);
-    },
-    [vertices],
-  );
+  const bufferRef = React.useRef<THREE.BufferGeometry>();
+  React.useLayoutEffect(() => {
+    bufferRef?.current?.setFromPoints(vertices);
+  }, [vertices]);
 
   return (
     <line>

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import * as THREE from "three";
-import { ReactThreeFiber, useUpdate } from "react-three-fiber";
+import { ReactThreeFiber } from "@react-three/fiber";
 
 interface EpicycloidProps {
   bigRadius?: number;
@@ -73,12 +73,10 @@ const Epicycloid: React.FC<EpicycloidProps> = ({
     return points;
   }, [R, r, x, y, showVolume, startAngle, pointsLimit]);
 
-  const epicycloidRef = useUpdate<THREE.BufferGeometry>(
-    (geometry) => {
-      geometry.setFromPoints(epicycloidPoints);
-    },
-    [epicycloidPoints],
-  );
+  const epicycloidRef = React.useRef<THREE.BufferGeometry>();
+  React.useLayoutEffect(() => {
+    epicycloidRef.current?.setFromPoints(epicycloidPoints);
+  }, [epicycloidPoints]);
 
   return (
     <line>

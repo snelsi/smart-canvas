@@ -36,3 +36,22 @@ export const remove = (array, index) => {
   arr.splice(index, 1);
   return arr;
 };
+
+interface IPoint {
+  x: number;
+  y: number;
+  z?: number;
+}
+export const getPoint = (point1: IPoint, point2: IPoint, Percentage: number): IPoint => ({
+  x: point1.x + ((point2.x - point1.x) * Percentage) / 100,
+  y: point1.y + ((point2.y - point1.y) * Percentage) / 100,
+  z: point1.z + ((point2.z - point1.z) * Percentage) / 100,
+});
+export const getPointRecursive = (points: IPoint[], percent: number): IPoint[] => {
+  if (points.length <= 1) return points;
+  const p = [];
+  for (let i = 0; i < points.length - 1; i++) {
+    p.push(getPoint(points[i], points[i + 1], percent));
+  }
+  return getPointRecursive(p, percent);
+};

@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import * as THREE from "three";
-import { useUpdate } from "react-three-fiber";
 import { useField, degToRad } from "scripts";
 import { Circle, Grid, GridCameraControls } from "components";
 import { StartPoint } from "./StartPoint";
@@ -24,12 +23,12 @@ export const Figure = () => {
 
   const [showAdvanced] = useField<number>(`${prefix}show-advanced`);
 
-  const groupRef = useUpdate<THREE.Group>(
-    (geometry) => {
-      geometry.rotation.z = showAdvanced ? degToRad(rotation) : 0;
-    },
-    [rotation, showAdvanced],
-  );
+  const groupRef = React.useRef<THREE.Group>();
+  React.useLayoutEffect(() => {
+    if (groupRef.current) {
+      groupRef.current.rotation.z = showAdvanced ? degToRad(rotation) : 0;
+    }
+  }, [rotation, showAdvanced]);
 
   const circleZ = React.useMemo(
     () => (showAdvanced && showVolume ? Math.sqrt((R + 2 * r) * (R + 2 * r) - R * R) : 0),

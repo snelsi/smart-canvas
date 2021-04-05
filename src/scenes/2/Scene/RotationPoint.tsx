@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import * as THREE from "three";
-import { useUpdate } from "react-three-fiber";
 
 import { useField } from "scripts";
 import { prefix } from "..";
@@ -13,14 +12,14 @@ export const RotationPoint: React.FC<RotationPointProps> = () => {
   const [posY] = useField<number>(`${prefix}rotation-point-y`);
   //   const [posZ] = useField<number>(`${prefix}rotation-point-z`);
 
-  const meshRef = useUpdate<THREE.Mesh>(
-    (geometry) => {
-      geometry.position.x = posX;
-      geometry.position.y = posY;
-      //   geometry.position.z = posZ;
-    },
-    [posX, posY],
-  );
+  const meshRef = React.useRef<THREE.Mesh>();
+  React.useLayoutEffect(() => {
+    if (meshRef.current) {
+      meshRef.current.position.x = posX;
+      meshRef.current.position.y = posY;
+      // meshRef.current.position.z = posZ;
+    }
+  }, [posX, posY]);
 
   return (
     <mesh ref={meshRef} name="2SceneRotationPoint">

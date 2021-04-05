@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import * as THREE from "three";
-import { useUpdate } from "react-three-fiber";
 import { degToRad } from "scripts";
 
 export interface IPoint {
@@ -120,18 +119,18 @@ export const Curve: React.FC<CurveProps> = ({
     showVolume,
   ]);
 
-  const meshRef = useUpdate<THREE.Mesh>(
-    (geometry) => {
-      geometry.scale.x = scale;
-      geometry.scale.y = scale;
-      geometry.scale.z = scale;
+  const meshRef = React.useRef<THREE.Mesh>();
+  React.useLayoutEffect(() => {
+    if (meshRef.current) {
+      meshRef.current.scale.x = scale;
+      meshRef.current.scale.y = scale;
+      meshRef.current.scale.z = scale;
 
-      geometry.position.x = startX;
-      geometry.position.y = startY;
-      geometry.rotation.z = degToRad(rotation);
-    },
-    [scale, startX, startY, rotation],
-  );
+      meshRef.current.position.x = startX;
+      meshRef.current.position.y = startY;
+      meshRef.current.rotation.z = degToRad(rotation);
+    }
+  }, [scale, startX, startY, rotation]);
 
   const colors = React.useMemo(() => {
     const color = new THREE.Color();
@@ -155,13 +154,11 @@ export const Curve: React.FC<CurveProps> = ({
     return colors;
   }, [lines.length, showColor]);
 
-  const geometryRef = useUpdate<THREE.BufferGeometry>(
-    (geometry) => {
-      geometry.setFromPoints(lines);
-      geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
-    },
-    [lines, colors],
-  );
+  const geometryRef = React.useRef<THREE.BufferGeometry>();
+  React.useLayoutEffect(() => {
+    geometryRef.current?.setFromPoints(lines);
+    geometryRef.current?.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+  }, [lines, colors]);
 
   return (
     <mesh ref={meshRef}>

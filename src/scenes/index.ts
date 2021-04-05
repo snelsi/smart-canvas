@@ -11,6 +11,7 @@ import { scene as Scene7 } from "./7/index";
 import { scene as Scene8 } from "./8/index";
 import { scene as Scene9 } from "./9/index";
 import { scene as Scene10 } from "./10/index";
+import { scene as Scene11 } from "./11/index";
 
 export interface Scene {
   title: string;
@@ -32,4 +33,5 @@ export const scenes: { [key: string]: Scene } = {
   "/8": Scene8,
   "/9": Scene9,
   "/10": Scene10,
+  "/11": Scene11,
 };

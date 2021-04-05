@@ -1,22 +1,14 @@
 import React from "react";
 
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { extend, useFrame, useThree } from "react-three-fiber";
-
-extend({ OrbitControls });
+import { useThree } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 
 export const CameraControls = ({ defaultX = 0, defaultY = 0, defaultZ = 15, ...props }) => {
-  const {
-    camera,
-    gl: { domElement },
-  } = useThree();
+  const { camera } = useThree();
 
   React.useEffect(() => {
     camera.position.set(defaultX, defaultY, defaultZ);
   }, [camera.position]);
 
-  const controls = React.useRef();
-  useFrame(() => controls.current?.update());
-
-  return <orbitControls ref={controls} args={[camera, domElement]} {...props} />;
+  return <OrbitControls {...props} />;
 };

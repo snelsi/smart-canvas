@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import * as THREE from "three";
-import { useUpdate } from "react-three-fiber";
 
 interface ProjectionWrapperProps {
   positionX?: number;
@@ -21,17 +20,17 @@ export const ProjectionWrapper: React.FC<ProjectionWrapperProps> = ({
   scaleZ = 1,
   children,
 }) => {
-  const ref = useUpdate<THREE.Group>(
-    (geometry) => {
-      geometry.scale.x = scaleX;
-      geometry.scale.y = scaleY;
-      geometry.scale.z = scaleZ;
+  const ref = React.useRef<THREE.Group>();
+  React.useLayoutEffect(() => {
+    if (ref.current) {
+      ref.current.scale.x = scaleX;
+      ref.current.scale.y = scaleY;
+      ref.current.scale.z = scaleZ;
 
-      geometry.position.x = positionX;
-      geometry.position.y = positionY;
-      geometry.position.z = positionZ;
-    },
-    [positionX, positionY, positionZ, scaleX, scaleY, scaleZ],
-  );
+      ref.current.position.x = positionX;
+      ref.current.position.y = positionY;
+      ref.current.position.z = positionZ;
+    }
+  }, [positionX, positionY, positionZ, scaleX, scaleY, scaleZ]);
   return <group ref={ref}>{children}</group>;
 };

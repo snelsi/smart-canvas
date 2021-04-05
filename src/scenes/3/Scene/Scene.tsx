@@ -1,7 +1,6 @@
 import React from "react";
 
 import * as THREE from "three";
-import { useUpdate } from "react-three-fiber";
 
 import { Grid, GridCameraControls } from "components";
 import { useField } from "scripts";
@@ -25,53 +24,51 @@ const WorldTransform = ({ children }) => {
     prevSyz: 0,
   });
 
-  const meshRef = useUpdate<THREE.Mesh>(
-    (mesh) => {
-      const { prevSyx, prevSzx, prevSxy, prevSzy, prevSxz, prevSyz } = prev.current;
+  const meshRef = React.useRef<THREE.Mesh>();
+  React.useLayoutEffect(() => {
+    const { prevSyx, prevSzx, prevSxy, prevSzy, prevSxz, prevSyz } = prev.current;
 
-      const reverseMatrix = new THREE.Matrix4();
-      reverseMatrix.set(
-        1,
-        -prevSyx,
-        -prevSzx,
-        0,
-        -prevSxy,
-        1,
-        -prevSzy,
-        0,
-        -prevSxz,
-        -prevSyz,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1,
-      );
-      mesh.applyMatrix4(reverseMatrix);
+    const reverseMatrix = new THREE.Matrix4();
+    reverseMatrix.set(
+      1,
+      -prevSyx,
+      -prevSzx,
+      0,
+      -prevSxy,
+      1,
+      -prevSzy,
+      0,
+      -prevSxz,
+      -prevSyz,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+    );
+    meshRef.current?.applyMatrix4(reverseMatrix);
 
-      mesh.position.set(0, 0, 0);
-      mesh.rotation.set(0, 0, 0);
-      mesh.scale.set(1, 1, 1);
-      mesh.updateMatrix();
+    meshRef.current?.position.set(0, 0, 0);
+    meshRef.current?.rotation.set(0, 0, 0);
+    meshRef.current?.scale.set(1, 1, 1);
+    meshRef.current?.updateMatrix();
 
-      prev.current = {
-        prevSyx: Syx,
-        prevSzx: Szx,
-        prevSxy: Sxy,
-        prevSzy: Szy,
-        prevSxz: Sxz,
-        prevSyz: Syz,
-      };
+    prev.current = {
+      prevSyx: Syx,
+      prevSzx: Szx,
+      prevSxy: Sxy,
+      prevSzy: Szy,
+      prevSxz: Sxz,
+      prevSyz: Syz,
+    };
 
-      const matrix = new THREE.Matrix4();
+    const matrix = new THREE.Matrix4();
 
-      matrix.set(1, Syx, Szx, 0, Sxy, 1, Szy, 0, Sxz, Syz, 1, 0, 0, 0, 0, 1);
+    matrix.set(1, Syx, Szx, 0, Sxy, 1, Szy, 0, Sxz, Syz, 1, 0, 0, 0, 0, 1);
 
-      mesh.applyMatrix4(matrix);
-    },
-    [Syx, Szx, Sxy, Szy, Sxz, Syz],
-  );
+    meshRef.current?.applyMatrix4(matrix);
+  }, [Syx, Szx, Sxy, Szy, Sxz, Syz]);
 
   return <mesh ref={meshRef}>{children}</mesh>;
 };
@@ -80,13 +77,13 @@ export const Figure = () => {
   const [scaleX] = useField<number>(`${prefix}scale-x`);
   const [scaleY] = useField<number>(`${prefix}scale-y`);
 
-  const groupRef = useUpdate<THREE.Mesh>(
-    (mesh) => {
-      mesh.scale.x = scaleX;
-      mesh.scale.y = scaleY;
-    },
-    [scaleX, scaleY],
-  );
+  const groupRef = React.useRef<THREE.Mesh>();
+  React.useLayoutEffect(() => {
+    if (groupRef.current) {
+      groupRef.current.scale.x = scaleX;
+      groupRef.current.scale.y = scaleY;
+    }
+  }, [scaleX, scaleY]);
 
   return (
     <WorldTransform>

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import * as THREE from "three";
-import { ReactThreeFiber, useUpdate } from "react-three-fiber";
+import { ReactThreeFiber } from "@react-three/fiber";
 
 interface StartPointProps {
   x: number;
@@ -11,14 +11,14 @@ interface StartPointProps {
 }
 
 export const StartPoint: React.FC<StartPointProps> = ({ x, y, z = 0, color = 0xffffff }) => {
-  const meshRef = useUpdate<THREE.Mesh>(
-    (geometry) => {
-      geometry.position.x = x;
-      geometry.position.y = y;
-      geometry.position.z = z;
-    },
-    [x, y, z],
-  );
+  const meshRef = React.useRef<THREE.Mesh>();
+  React.useLayoutEffect(() => {
+    if (meshRef.current) {
+      meshRef.current.position.x = x;
+      meshRef.current.position.y = y;
+      meshRef.current.position.z = z;
+    }
+  }, [x, y, z]);
 
   return (
     <mesh ref={meshRef}>
