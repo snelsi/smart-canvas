@@ -64,6 +64,7 @@ export interface ColorItem extends MenuItemBase {
 }
 export interface TabItem extends MenuItemBase {
   type: "tab";
+  fieldName: string;
   items: IMenuItem[];
 }
 export interface OptionalGroupItem extends MenuItemBase {

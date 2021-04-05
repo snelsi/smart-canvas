@@ -79,6 +79,7 @@ export const menuItems: IMenuItem[] = [
   },
   {
     type: "tab",
+    fieldName: `${prefix}figure`,
     title: "Фигура",
     items: [
       {
