@@ -23,8 +23,21 @@ const curve = [
   { x: 1.8, y: 3.5 },
 ];
 
+type IPreset =
+  | "sunset"
+  | "dawn"
+  | "night"
+  | "warehouse"
+  | "forest"
+  | "apartment"
+  | "studio"
+  | "city"
+  | "park"
+  | "lobby"
+  | "none";
+
 export const Figure = () => {
-  const [preset] = useField<string>(`${prefix}preset`);
+  const [preset] = useField<IPreset>(`${prefix}preset`);
   const [segments] = useField<number>(`${prefix}segments`);
   const [phiStart] = useField<number>(`${prefix}phiStart`);
   const [phiLength] = useField<number>(`${prefix}phiLength`);

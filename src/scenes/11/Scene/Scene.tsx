@@ -16,8 +16,21 @@ export const Controls = () => (
   </>
 );
 
+type IPreset =
+  | "sunset"
+  | "dawn"
+  | "night"
+  | "warehouse"
+  | "forest"
+  | "apartment"
+  | "studio"
+  | "city"
+  | "park"
+  | "lobby"
+  | "none";
+
 const Env = () => {
-  const [preset] = useField<string>(`${prefix}preset`);
+  const [preset] = useField<IPreset>(`${prefix}preset`);
   return (
     <React.Suspense fallback={null}>
       <Environment
